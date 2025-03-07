@@ -1,4 +1,7 @@
-﻿
+﻿//Get an input number from the console
+//Print all even numbers starting from 2
+//Get another input number from the console
+//Print all odd numbers starting from 1
 
 Console.WriteLine("Please enter a number: ");
 bool firstSuccess = int.TryParse(Console.ReadLine(), out int firstNumber);
