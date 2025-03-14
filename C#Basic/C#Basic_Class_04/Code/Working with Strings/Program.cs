@@ -33,9 +33,11 @@ string secondString = "We wil have \"fair\" elections";
 string thirdString = "This is first line. \n This is second line";
 Console.WriteLine(thirdString);
 
-string driveMessage = @"Check your C:|drive and D:\drive"; // "Check your C:\\drive and your D:\\drive";
+// we can use @ in front of the string, to escape special characters in the whole string
+string driveMessage = @"Check your C:\drive and D:\drive"; // "Check your C:\\drive and your D:\\drive";
 Console.WriteLine(driveMessage);
 
+//@ in front of the string will not work for double quotes, we have to use double quotes twice as esacpe character
 string quotesString = @"We will have ""fair"" elections";
 Console.WriteLine(quotesString);
 
