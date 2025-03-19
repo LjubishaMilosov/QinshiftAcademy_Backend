@@ -18,4 +18,9 @@ cat.PrintAge();  // call the implementation from the Cat class
 
 
 cat.PrintInfo();
+
+Dog dog = new Dog("Rex", "Brown");
+dog.PrintInfo();  // it will call the PrintInfo method from the animal class( we haven't overriden that method in the Dog class
+
+Dog newDog = new Dog();
 Console.ReadLine();
