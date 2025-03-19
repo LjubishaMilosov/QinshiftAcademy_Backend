@@ -30,7 +30,7 @@ namespace Inheritance.Models
             Console.WriteLine("Calling the type Animal constructor");
         }
 
-        // we need to use the virtual keyword to allow to be overrided
+        // we need to use the virtual keyword to allow this method to be overriden
         public virtual void PrintInfo()
         {
             Console.WriteLine($"The animal with Id {_Id} and name {Name} and type {Type} is {Age} years old");
