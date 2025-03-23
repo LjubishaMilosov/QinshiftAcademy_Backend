@@ -49,7 +49,7 @@ foreach(int number in listOfInts)
 
 // Dictionary - works with key value pair
 Console.WriteLine("===========Dictionary===============");
-// we are tlling the dictionary that its keys will b of data type ints and its values of data type strings
+// we are tlling the dictionary that its keys will be of data type ints and its values of data type strings
 Dictionary<int, string> products = new Dictionary<int, string>()  // in Dictionary we don't have indices
 {
     {111, "potato"},
@@ -81,7 +81,7 @@ queue.Enqueue(5);  // add 5 to the end of the queue
 queue.Enqueue(19); // add 19 to the end of the queue
 queue.Enqueue(100);  // add 100 to the end of the queue
 
-int firstElement = queue.Dequeue();  // remove first element from the queue
+int firstElement = queue.Dequeue();  // removes and returns first element from the queue
 Console.WriteLine(firstElement);  // 5
 int readFirstElement = queue.Peek();  // only returns the value of first element in the queue without removing it
 Console.WriteLine(readFirstElement);  // 19
@@ -101,7 +101,7 @@ stack.Push("Hello");  // add element to the stack\
 stack.Push("welcome"); 
 stack.Push("bye");
 
-string lastElement = stack.Pop();  // remove and return the last element from the stack (bye)
+string lastElement = stack.Pop();  // REMOVE and RETURN the last element from the stack (bye)
 Console.WriteLine(lastElement);  // bye
 
 string currentLastElement = stack.Peek();  // only returns the value of the last element in the stack without removing it
