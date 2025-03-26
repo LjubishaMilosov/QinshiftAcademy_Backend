@@ -61,3 +61,28 @@ else
 {
     Console.WriteLine(dogWithNameOnA.Name);
 }
+//First dog with age 1 whose name starts with L
+Dog dogAgedOneStartingWithL = dogs.FirstOrDefault(d => d.Age == 1 && (d.Name.StartsWith("L") || d.Name.StartsWith("l")))  ;
+
+Console.WriteLine("============SELECT===============");
+
+//get all dog names
+List<string>dogNames = dogs.Select(d => d.Name).ToList();
+
+//take the names of all dogs aged 2
+// List<string> dogsnamesAged2 = dogs.Select(d => d.Name)Where(     // here we are working with IEnumerable<string>
+                                                                     // (we have only the name so we can not use Where to filetr by age -
+                                                                   // string does not have 'age' property)
+
+List<string> dogsnamesAged2 = dogs.Where(d => d.Age == 2).Select(d => d.Name).ToList();
+
+List<string>namesOfDogsAged2SatrtsWithL = 
+    dogs  // here we have the whole List<dog>
+       .Where(x => x.Age ==2)  // here we have IEnumerable<dog> with only dogs aged 2
+       .Select(x=>x.Name)  // here we have IEnumerable<string> with only names of dogs aged 2
+       .Where(x => x.StartsWith("L") || x.StartsWith("l")) // here we have IEnumerable<string> with only names of dogs aged 2 and starting with L
+       .ToList(); // here we have List<string> with only names of dogs aged 2 and starting with L
+
+Dog lastDogAged1 = dogs.Last(d => d.Age == 1); // gets the last dog aged 1 -> this might throw an error
+
+Dog lastDogAged1BetterOption = dogs.LastOrDefault(d => d.Age == 1); // gets the last dog aged 1 or null if there is no dog aged 1
