@@ -51,3 +51,27 @@ List<Song> songs = new List<Song>() //we need a collection on which we will use 
     song16, song17, song18, song19, song20, song21, song22, song23, song24, song25,
     song26, song27, song28, song29, song30
 };
+
+//● Select the person Jerry and add all the songs which start with the letter B.
+
+Person personJerry = fans.FirstOrDefault(x=>x.FirstName.ToUpper() == "Jerry".ToUpper());
+if(personJerry == null)
+{
+    Console.WriteLine("Person Jerry not found");
+}
+else
+{
+   personJerry.FavoriteSongs = songs.Where(x=>x.Title.ToUpper().StartsWith("B")).ToList();
+    personJerry.GetFavSongs();
+}
+
+//● Select the person Maria and add all the songs with length longer than 6 min.
+
+//● Select the person Jane and add all the songs that are of genre Rock.
+
+//● Select the person Stefan and add all songs shorter than 3 min and of genre Hip-Hop.
+
+//● Select all persons from the persons array that have 4 or more songs.
+
+
+
