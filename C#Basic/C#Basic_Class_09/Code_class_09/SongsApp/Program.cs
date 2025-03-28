@@ -66,6 +66,26 @@ else
 }
 
 //● Select the person Maria and add all the songs with length longer than 6 min.
+Person personMaria = fans.FirstOrDefault(x => x.FirstName.ToUpper() == "Maria".ToUpper());
+if (personMaria == null)
+{
+    Console.WriteLine("Person Maria not found");
+}
+else
+{
+    personMaria.FavoriteSongs = songs.Where(x => x.Length > 360).ToList();
+    personMaria.GetFavSongs();
+}
+// Bonus:
+Person FindPerson(List<Person> fansList, string name)
+{
+    Person person = fansList.FirstOrDefault(x => x.FirstName.ToUpper() == name.ToUpper());
+    if(person == null)
+    {
+        Console.WriteLine($"Person {name} not found");
+    }
+    return person;
+}
 
 //● Select the person Jane and add all the songs that are of genre Rock.
 
