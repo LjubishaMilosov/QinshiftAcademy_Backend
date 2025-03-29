@@ -21,3 +21,24 @@ finally
     // the finally block will be executed no matter what
     Console.WriteLine("This is the finally block");
 }
+
+// THROWING AN EXCEPTION
+
+try
+{
+    Console.WriteLine("Please enter 'a' or 'b': ");
+    string character = Console.ReadLine();
+    if(character.ToLower() == "a" || character.ToLower() == "b")
+    {
+        Console.WriteLine("You entered the correct character");
+    }
+    else
+    {
+        throw new Exception("User did enter a or b");
+    }
+
+}
+catch(Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
