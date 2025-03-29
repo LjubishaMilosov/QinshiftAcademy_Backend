@@ -88,10 +88,31 @@ Person FindPerson(List<Person> fansList, string name)
 }
 
 //● Select the person Jane and add all the songs that are of genre Rock.
+Person personJane = FindPerson(fans, "Jane");
+if (personJane != null)
+{
+    // x.Genre is of type Enum, so we can compare it with the GenreEnum.Rock
+    personJane.FavoriteSongs = songs.Where(x => x.Genre == GenreEnum.Rock).ToList();
+    personJane.GetFavSongs();
+}
 
-//● Select the person Stefan and add all songs shorter than 3 min and of genre Hip-Hop.
+//● Select the person Stefan and add all songs shorter than 3 min and of genre Techno.
+Person personStefan = FindPerson(fans, "Stefan");
+if (personStefan != null)
+{
+    personStefan.FavoriteSongs = songs.Where(x => x.Genre == GenreEnum.Techno && x.Length < 360).ToList();
+    personStefan.GetFavSongs();
+}
 
-//● Select all persons from the persons array that have 4 or more songs.
+//● Select all persons from the fans array that have 4 or more songs.
+List<Person> fansWith4Songs = fans.Where(x => x.FavoriteSongs.Count >= 4).ToList();
+foreach (Person fan in fansWith4Songs)
+{
+    Console.WriteLine($"{fan.FirstName} has {fan.FavoriteSongs.Count} songs");
+    fan.GetFavSongs();
 
+}
 
+// We ALWAYS NEED TO DO THE CONDITION CHECK BEFORE WE SELECT THE PROPERTY (AFTER THE SELECT WE WON'T HAVE ACCESS TO THE OBJECT PROPERTY)
+List<string> fansNames = fans.Where(x => x.FavoriteSongs.Count >= 4).Select(x => x.FirstName).ToList();
 
