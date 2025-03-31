@@ -1,4 +1,9 @@
 ﻿
+//● Make a class Cinema. Cinema must have: Name, Halls, ListOfMovies
+//● Cinema should have method MoviePlaying that will have a parameter
+//‘movie’ and then print out in the console “Watching Movie.Title”
+//● We will provide 10 movies per cinema to put in the cinema movies list.
+
 namespace MoviesApp.Domain.Models
 {
     public class Cinema

@@ -1,5 +1,15 @@
 ﻿
+using System.Xml.Linq;
 using MoviesApp.Domain.Enums;
+
+//Make a class Movie. Movie must have: Title, Genre, Rating,
+//TicketPrice and a constructor for setting them.
+//● Rating should be a number from 1 to 5. Throw exception if its more or
+//less ( you should also handle other exceptions)
+//● Set the TicketPrice to be 5 * Rating when creating a new object
+//● Genre should be an enum with Comedy, Horror, Action, Drama and
+//SciFi
+
 
 namespace MoviesApp.Domain.Models
 {
