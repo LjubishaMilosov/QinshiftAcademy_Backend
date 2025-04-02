@@ -7,6 +7,20 @@ List<Admin> Admins = new List<Admin>();
 List<Student> Students = new List<Student>();
 List<Trainer> Trainers = new List<Trainer>();
 
+Admin SearchAdmins(string username)
+{
+    return Admins.FirstOrDefault(x => x.Username == username);
+}
+
+Trainer SearchTrainers(string username)
+{
+    return Trainers.FirstOrDefault(x => x.Username == username);
+}
+
+Student SearchStudents(string username)
+{
+    return Students.FirstOrDefault(x => x.Username == username);
+}
 void FillDataBase()
 {
     
@@ -45,24 +59,3 @@ void FillDataBase()
     });
 
 }
-
-void PrintStudents()
-{
-    Console.WriteLine("Here are the students:");
-    foreach (Student student in Students)
-    {
-        Console.WriteLine(student.GetFullName());
-    }
-}
-
-void PrintSubjects()
-{
-    Console.WriteLine("Here are the subjects:");
-    foreach (Subject subject in Subjects)
-    {
-        Console.WriteLine(subject.Name);
-        int numOfStudents = Students.Count(x => subject.Name == x.CurrentSubject.Name);
-        Console.WriteLine(numOfStudents);
-    }
-}
-
