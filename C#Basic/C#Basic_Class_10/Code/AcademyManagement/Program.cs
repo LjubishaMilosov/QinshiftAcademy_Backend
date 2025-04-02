@@ -45,3 +45,24 @@ void FillDataBase()
     });
 
 }
+
+void PrintStudents()
+{
+    Console.WriteLine("Here are the students:");
+    foreach (Student student in Students)
+    {
+        Console.WriteLine(student.GetFullName());
+    }
+}
+
+void PrintSubjects()
+{
+    Console.WriteLine("Here are the subjects:");
+    foreach (Subject subject in Subjects)
+    {
+        Console.WriteLine(subject.Name);
+        int numOfStudents = Students.Count(x => subject.Name == x.CurrentSubject.Name);
+        Console.WriteLine(numOfStudents);
+    }
+}
+
