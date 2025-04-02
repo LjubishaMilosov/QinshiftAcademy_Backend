@@ -1,12 +1,126 @@
-﻿
-using AcademyManagement.Domain.Classes;
+﻿using AcademyManagement.Domain.Classes;
 using AcademyManagement.Domain.Enums;
 
-List<Subject> Subjects = new List<Subject>();
-List<Admin> Admins = new List<Admin>();
-List<Student> Students = new List<Student>();
-List<Trainer> Trainers = new List<Trainer>();
+List<Subject> Subjects;
+List<Admin> Admins;
+List<Trainer> Trainers;
+List<Student> Students;
 
+FillDatabase();
+
+while (true)
+{
+
+    try
+    {
+        Console.WriteLine("Enter username");
+        string userName = Console.ReadLine();
+        if (string.IsNullOrEmpty(userName))
+        {
+            throw new Exception("You must enter username");
+        }
+
+        //first check admins
+        Admin admin = SearchAdmins(userName);
+        if (admin != null)
+        {
+            Console.WriteLine("Enter option");
+            Console.WriteLine("1) Add teacher, 2) Remove teacher, 3) Add student, 4) Remove student," +
+                "5) Add admin, 6) Remove admin");
+            int option = int.Parse(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    AddMember(Role.Trainer);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter username");
+                    string username = Console.ReadLine();
+                    RemoveTrainer(username);
+                    break;
+                case 3:
+                    AddMember(Role.Student);
+                    break;
+                case 4:
+                    Console.WriteLine("Enter username");
+                    string studentUsername = Console.ReadLine();
+                    RemoveStudent(studentUsername);
+                    break;
+                case 5:
+                    AddMember(Role.Admin);
+                    break;
+                case 6:
+                    Console.WriteLine("Enter username");
+                    string adminUsername = Console.ReadLine();
+                    if (adminUsername == admin.Username)
+                        throw new Exception("You can not delete yourself");
+                    RemoveAdmin(adminUsername);
+                    break;
+                default:
+                    throw new Exception("You must enter valid option 1-6");
+
+            }
+        }
+        else
+        {
+            //not an admin
+            Trainer trainer = SearchTrainers(userName);
+            if (trainer != null)
+            {
+                //trainer
+                Console.WriteLine("Enter option 1) See students 2) See subjects");
+                int trainerOption = int.Parse(Console.ReadLine());
+                switch (trainerOption)
+                {
+                    case 1:
+                        PrintStudents();
+                        break;
+                    case 2:
+                        PrintSubjects();
+                        break;
+                    default:
+                        throw new Exception("You must enter valid option 1/2");
+
+                }
+            }
+            else
+            {
+                //not an admin, not a trainer
+                Student student = SearchStudents(userName);
+                if (student == null)
+                {
+                    throw new Exception("The user does not exist");
+                }
+                student.PrintDetails();
+            }
+        }
+    }
+    catch (FormatException ex)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Input was not a number");
+        Console.WriteLine(ex.Message);
+    }
+    catch (Exception ex)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("An error occured");
+        Console.WriteLine(ex.Message);
+    }
+
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine("Would you like to continue? Type yes");
+    string response = Console.ReadLine();
+    if (response.ToLower() == "yes")
+    {
+        continue;
+    }
+    else
+    {
+        break;
+    }
+
+}
 void PrintStudents()
 {
     Console.WriteLine("Here are the students:");
@@ -116,6 +230,7 @@ void AddMember(Role role)
     }
 }
 
+
 Admin SearchAdmins(string username)
 {
     return Admins.FirstOrDefault(x => x.Username == username);
@@ -130,9 +245,10 @@ Student SearchStudents(string username)
 {
     return Students.FirstOrDefault(x => x.Username == username);
 }
-void FillDataBase()
+
+void FillDatabase()
 {
-    
+    Subjects = new List<Subject>();
     Subjects.Add(new Subject { Name = "HTML" });
     Subjects.Add(new Subject { Name = "Basic JS" });
     Subjects.Add(new Subject { Name = "Advanced JS" });
