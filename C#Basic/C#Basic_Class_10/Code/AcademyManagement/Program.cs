@@ -7,6 +7,65 @@ List<Admin> Admins = new List<Admin>();
 List<Student> Students = new List<Student>();
 List<Trainer> Trainers = new List<Trainer>();
 
+void AddMember(Role role)
+{
+    Console.WriteLine("Enter username");
+    string username = Console.ReadLine();
+    if (string.IsNullOrEmpty(username))
+    {
+        throw new Exception("You must enter username");
+    }
+
+    Admin admin = SearchAdmins(username);
+    Trainer trainer = SearchTrainers(username);
+    Student student = SearchStudents(username);
+
+    if (admin != null || trainer != null || student != null)
+    {
+        throw new Exception("User with this username already exists");
+    }
+
+    Console.WriteLine("Enter first name");
+    string firstName = Console.ReadLine();
+    if (string.IsNullOrEmpty(firstName))
+    {
+        throw new Exception("You must enter first name");
+    }
+
+    Console.WriteLine("Enter last name");
+    string lastName = Console.ReadLine();
+    if (string.IsNullOrEmpty(lastName))
+    {
+        throw new Exception("You must enter last name");
+    }
+
+    int age = int.Parse(Console.ReadLine());
+    if (age < 16)
+    {
+        throw new Exception("Age must be greater than 16");
+    }
+
+    if (role == Role.Admin)
+    {
+        Admins.Add(new Admin(username, firstName, lastName, age));
+    }
+    else if (role == Role.Trainer)
+    {
+        Trainers.Add(new Trainer(username, firstName, lastName, age));
+    }
+    else
+    {
+        Student newStudent = new Student(username, firstName, lastName, age);
+
+        Console.WriteLine("Enter subject name");
+        string currentSubject = Console.ReadLine();
+        Subject current = Subjects.FirstOrDefault(x => x.Name == currentSubject);
+        newStudent.CurrentSubject = current;
+
+        Students.Add(newStudent);
+    }
+}
+
 Admin SearchAdmins(string username)
 {
     return Admins.FirstOrDefault(x => x.Username == username);
