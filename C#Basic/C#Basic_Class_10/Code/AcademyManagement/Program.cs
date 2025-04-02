@@ -7,6 +7,56 @@ List<Admin> Admins = new List<Admin>();
 List<Student> Students = new List<Student>();
 List<Trainer> Trainers = new List<Trainer>();
 
+void PrintStudents()
+{
+    Console.WriteLine("Here are the students:");
+    foreach (Student student in Students)
+    {
+        Console.WriteLine(student.GetFullName());
+    }
+}
+
+void PrintSubjects()
+{
+    Console.WriteLine("Here are the subjects:");
+    foreach (Subject subject in Subjects)
+    {
+        Console.WriteLine(subject.Name);
+        int numOfStudents = Students.Count(x => subject.Name == x.CurrentSubject.Name);
+        Console.WriteLine(numOfStudents);
+    }
+}
+
+void RemoveAdmin(string username)
+{
+    Admin admin = SearchAdmins(username);
+    if (admin == null)
+    {
+        throw new Exception("There is no such admin");
+    }
+    Admins.Remove(admin);
+}
+
+void RemoveStudent(string username)
+{
+    Student student = SearchStudents(username);
+    if (student == null)
+    {
+        throw new Exception("There is no such student");
+    }
+    Students.Remove(student);
+}
+
+void RemoveTrainer(string username)
+{
+    Trainer trainer = SearchTrainers(username);
+    if (trainer == null)
+    {
+        throw new Exception("There is no such trainer");
+    }
+    Trainers.Remove(trainer);
+}
+
 void AddMember(Role role)
 {
     Console.WriteLine("Enter username");
