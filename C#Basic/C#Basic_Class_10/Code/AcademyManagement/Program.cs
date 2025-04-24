@@ -52,7 +52,7 @@ while (true)
                 case 6:
                     Console.WriteLine("Enter username");
                     string adminUsername = Console.ReadLine();
-                    if (adminUsername == admin.Username)
+                    if (adminUsername == admin.UserName)
                         throw new Exception("You can not delete yourself");
                     RemoveAdmin(adminUsername);
                     break;
@@ -233,17 +233,17 @@ void AddMember(Role role)
 
 Admin SearchAdmins(string username)
 {
-    return Admins.FirstOrDefault(x => x.Username == username);
+    return Admins.FirstOrDefault(x => x.UserName == username);
 }
 
 Trainer SearchTrainers(string username)
 {
-    return Trainers.FirstOrDefault(x => x.Username == username);
+    return Trainers.FirstOrDefault(x => x.UserName == username);
 }
 
 Student SearchStudents(string username)
 {
-    return Students.FirstOrDefault(x => x.Username == username);
+    return Students.FirstOrDefault(x => x.UserName == username);
 }
 
 void FillDatabase()
