@@ -8,7 +8,7 @@ namespace Task_1.Logic.Services
     {
         public List<NameCountResult> CountNameAppearancesInText(string text, List<string> names)
         {
-           var nwordsInText  = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+           var nwordsInText  = text.Split(new char[] {' ', '.', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             List<NameCountResult> namesCountResult = names
                 .Select(name => new NameCountResult
