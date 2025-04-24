@@ -10,5 +10,9 @@ namespace Task_1.Logic.Models
             Name = name;
             Count = count;
         }
+        public NameCountResult()
+        {
+            
+        }
     }
 }

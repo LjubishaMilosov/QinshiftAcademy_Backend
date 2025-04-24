@@ -9,13 +9,32 @@ namespace Task_1.Logic.Services
         public List<NameCountResult> CountNameAppearancesInText(string text, List<string> names)
         {
            var nwordsInText  = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            var nameCountResults = new List<NameCountResult>();
-            foreach (var name in names)
+
+            List<NameCountResult> namesCountResult = names
+                .Select(name => new NameCountResult
+                {
+                    Name = name,
+                    Count = nwordsInText.Count(word => word.Equals(name, StringComparison.OrdinalIgnoreCase))
+                })
+                .ToList();
+         
+            // Step by Step
+            List<NameCountResult> namesCountResultExample = new();
+            foreach(string name in names)
             {
-                var count = nwordsInText.Count(word => string.Equals(word, name, StringComparison.OrdinalIgnoreCase));
-                nameCountResults.Add(new NameCountResult(name, count));
+                int nameCounter = 0;
+                foreach (var word in nwordsInText)
+                {
+                    if (name.ToLower() == word.ToLower())
+                    {
+                        nameCounter++;
+                    }
+                }
+                NameCountResult nameCount = new NameCountResult(name,nameCounter);
+                namesCountResultExample.Add(nameCount);
             }
-            return nameCountResults;
+
+            return namesCountResultExample;
         }
     }
 }
