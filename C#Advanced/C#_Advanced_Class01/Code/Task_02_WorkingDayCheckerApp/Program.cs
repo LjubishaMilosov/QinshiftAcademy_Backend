@@ -24,7 +24,7 @@ using System.Globalization;
             Console.WriteLine("Enter a date (yyyy-MM-dd):");
             string input = Console.ReadLine();
 
-            if (DateTime.TryParseExact(input, "yyyy-MM-dd", out DateTime enteredDate))
+            if (DateTime.TryParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime enteredDate))
             {
                 if (IsWorkingDay(enteredDate, nonWorkingDays))
                 {
