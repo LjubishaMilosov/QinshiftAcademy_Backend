@@ -1,7 +1,9 @@
 ﻿
+using AbstractClassesAndInterfaces.Domain.Interfaces;
+
 namespace AbstractClassesAndInterfaces.Domain.Models
 {
-    public class Developer : Person
+    public class Developer : Person, IDeveloper
     {
         public string ProjectName { get; set; }
         public int YearsOfExperience { get; set; }
@@ -22,6 +24,18 @@ namespace AbstractClassesAndInterfaces.Domain.Models
         public override string GetProfessionalInfo()
         {
             return $"{FullName} works as a deloper for {YearsOfExperience}. {FullName} works on {ProjectName}";
+        }
+
+        public void Code()
+        {
+            Console.WriteLine("Coding...\n");
+            if(ProgrammingLanguages.Count > 0 )
+            {
+                foreach(string language in ProgrammingLanguages)
+                {
+                    Console.WriteLine($"Coding in {language} /n");
+                }
+            }
         }
     }
 }
