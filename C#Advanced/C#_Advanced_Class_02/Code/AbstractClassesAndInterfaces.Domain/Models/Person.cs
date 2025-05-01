@@ -1,6 +1,8 @@
-﻿namespace AbstractClassesAndInterfaces.Domain.Models
+﻿using AbstractClassesAndInterfaces.Domain.Interfaces;
+
+namespace AbstractClassesAndInterfaces.Domain.Models
 {
-    public abstract class Person
+    public abstract class Person : IPerson
     {
         public string FullName { get; set; }
         public int  Age { get; set; }
@@ -27,6 +29,16 @@
         // this method does not have an implementation in this (base) class.
         // All classes that inherit from this class MUST implement this method
         public abstract string GetProfessionalInfo();
+
+        public void Greet()
+        {
+            Console.WriteLine($"Hello, my name is {FullName}.");
+        }
+
+        public void SengGift(string nameOfGift)
+        {
+            Console.WriteLine($"Sending {nameOfGift} from {Address} to {FullName}.");
+        }
     }
 
 }
