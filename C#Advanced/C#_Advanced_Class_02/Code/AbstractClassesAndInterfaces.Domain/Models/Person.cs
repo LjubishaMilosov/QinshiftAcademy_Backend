@@ -24,7 +24,7 @@
             Console.WriteLine($"{FullName} {Age} : {PhoneNumber}");
         }
 
-        // this method does not have n implementation in this (base) class.
+        // this method does not have an implementation in this (base) class.
         // All classes that inherit from this class MUST implement this method
         public abstract string GetProfessionalInfo();
     }
