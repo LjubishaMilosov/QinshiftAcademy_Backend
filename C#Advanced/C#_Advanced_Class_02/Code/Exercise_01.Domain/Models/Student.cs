@@ -1,8 +1,10 @@
 ﻿
 
+using Exercise_01.Domain.Interfaces;
+
 namespace Exercise_01.Domain.Models
 {
-    public class Student : User
+    public class Student : User, IStudent
     {
         public List<int> Grades { get; set; }
 
@@ -19,6 +21,12 @@ namespace Exercise_01.Domain.Models
             {
                 Console.WriteLine($"{grade} \n");
             }
+        }
+
+        // we need to implement this method becae the student class implements IStudent interfce
+        public void PrintGrades()
+        {
+            throw new NotImplementedException();
         }
     }
 }
