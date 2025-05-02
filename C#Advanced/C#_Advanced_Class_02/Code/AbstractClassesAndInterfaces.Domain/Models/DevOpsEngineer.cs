@@ -3,7 +3,7 @@ using AbstractClassesAndInterfaces.Domain.Interfaces;
 
 namespace AbstractClassesAndInterfaces.Domain.Models
 {
-    public class DevOpsEngineer : Person, IDevOpsEngineer
+    public class DevOpsEngineer : Person, IDevOpsEngineer, IDeveloper
     {
         public bool IsAzureCertified { get; set; }
         public bool IsAWSCertified { get; set; }
@@ -30,6 +30,21 @@ namespace AbstractClassesAndInterfaces.Domain.Models
         {
             List<int> okStatuses = new List<int> { 200, 201, 203, 204 };
             return okStatuses.Contains(status);
+        }
+
+        // each class can implement the method diffrently depending on the 
+        // logic in that class
+        public void Code()
+        {
+            if(IsAzureCertified)
+            {
+                Console.WriteLine("Writing code for Azure portal services");
+            }
+             if (IsAWSCertified)
+            {
+                Console.WriteLine("Writing code for AWS portal services");
+            }
+            
         }
     }
 }
