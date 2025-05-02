@@ -1,7 +1,9 @@
 ﻿
+using AbstractClassesAndInterfaces.Domain.Interfaces;
+
 namespace AbstractClassesAndInterfaces.Domain.Models
 {
-    public class QAEngineer : Person
+    public class QAEngineer : Person, IQAEngineer, IDeveloper
     {
         public int NumberOfProjects { get; set; }
         public List<string> TestingFrameworks { get; set; }
@@ -26,6 +28,16 @@ namespace AbstractClassesAndInterfaces.Domain.Models
                 }
             }
             return info;
+        }
+
+        public void TestingFeature(string feature, DateTime deadline)
+        {
+            Console.WriteLine($"Testing feature {feature}. The deadline is {deadline}.");
+        }
+
+        public void Code()
+        {
+            Console.WriteLine($"{FullName} is a QA Engineer but also works with writing code for testing.");
         }
     }
 }
