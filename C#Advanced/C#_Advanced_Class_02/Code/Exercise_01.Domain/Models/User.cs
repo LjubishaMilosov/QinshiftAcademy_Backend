@@ -1,7 +1,9 @@
 ﻿
+using Exercise_01.Domain.Interfaces;
+
 namespace Exercise_01.Domain.Models
 {
-    public abstract class User
+    public abstract class User : IUser
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,5 +17,11 @@ namespace Exercise_01.Domain.Models
             Username = username;
             Password = password;
         }
+
+        // we will implement the method in each of the derived classes
+        public abstract void PrintUser();
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
