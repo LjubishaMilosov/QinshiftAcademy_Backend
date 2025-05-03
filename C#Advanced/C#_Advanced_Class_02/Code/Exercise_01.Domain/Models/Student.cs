@@ -26,7 +26,15 @@ namespace Exercise_01.Domain.Models
         // we need to implement this method becae the student class implements IStudent interfce
         public void PrintGrades()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Student with username {Username} has grades: ");
+            foreach (int grade in Grades)
+            {
+                Console.WriteLine($"{grade} \n");
+            }
+
+            // there isa method sum that we can use on collections of numbers to sum up the items
+            int avgGrade = Grades.Sum() / Grades.Count;
+            Console.WriteLine($"The averae grade is {avgGrade}");
         }
     }
 }
