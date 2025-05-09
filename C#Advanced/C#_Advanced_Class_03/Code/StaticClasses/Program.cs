@@ -76,9 +76,14 @@ else
                 newOrder.Description = descriptionInput;
                 newOrder.PrintTitle(); // PrintTitle is not a static method, so we need to access it using the object (instance) of the class
                 Order.IsValid(newOrder); // IsValid is a static method, so we need to access it using the class name
+
                 //4. add the new order to the user
-                currentUser.Orders.Add(newOrder);
-                Console.WriteLine("New order added successfully");
+                OrdersDb.InsertOrder(currentUser.Id, newOrder);
+                
+                Console.WriteLine("Successfully adde new order");
+                
+                currentUser.PrintOrders(); // User is a standard class and PrintOrders is a standard method
+                                           // so we can access it using the object (instance) of the class
             }
         }
         
