@@ -19,7 +19,7 @@ namespace Exercise_01.Domain.Models
 
         public void PrintSubject()
         {
-            Console.WriteLine($"Teacher  {Name} teaches {Subject}");
+            Console.WriteLine($"Teacher {Name} teaches {Subject}");
         }
     }
 }
