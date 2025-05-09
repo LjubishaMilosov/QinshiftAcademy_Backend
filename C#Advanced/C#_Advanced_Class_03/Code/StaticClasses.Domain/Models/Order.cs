@@ -14,7 +14,7 @@ namespace StaticClasses.Domain.Models
             Id = new Random().Next(1, 100000);
             Status = OrderStatusEnum.Created;
         }
-        public Order(int id, string title, string description, OrderStatusEnum statusEnum) : this()
+        public Order(int id, string title, string description, OrderStatusEnum statusEnum)
         {
             Id = id;
             Title = title;
