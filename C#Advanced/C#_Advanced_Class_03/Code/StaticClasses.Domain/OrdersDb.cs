@@ -16,6 +16,8 @@ namespace StaticClasses.Domain
         // all members need to be static
         public static List<Order> Orders { get; set; }
         public static List<User> Users { get; set; }
+        public static int lastOrderId = 5; // this is used to generate new order ids
+
         // static constructor, all members  must be static
         static OrdersDb()
         {
@@ -48,6 +50,33 @@ namespace StaticClasses.Domain
             {
                 Console.WriteLine($"User {i}: {user.Username} \n");
                 i++;
+            }
+        }
+
+        public static void InsertOrder(int userId, Order order)
+        {
+            // simulates that the DB generates an Id, it should be +1 from the last order
+            lastOrderId++;
+            order.Id = lastOrderId;
+
+            // this method is used to insert a new order
+            // it is not a good practice to use static classes for data storage
+            // but it is used here to demonstrate the concept of static classes
+            // and how they can be used to store data that is shared across the application
+            Orders.Add(order);
+
+            // add the order to the user
+
+            // validate that the user with userId exists
+            User userFromDb = Users.FirstOrDefault(x => x.Id == userId);
+            if (userFromDb != null)
+            {
+                // add the order to the user
+                userFromDb.Orders.Add(order);
+            }
+            else
+            {
+                throw new Exception("User does not exist");
             }
         }
     }
