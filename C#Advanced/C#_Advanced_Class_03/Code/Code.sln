@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClasses", "StaticClasses\StaticClasses.csproj", "{59A82559-A98C-4313-B186-30827986171C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClasses.Domain", "StaticClasses.Domain\StaticClasses.Domain.csproj", "{F3881BE3-505E-4552-9D16-C9CB45A09814}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59A82559-A98C-4313-B186-30827986171C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A82559-A98C-4313-B186-30827986171C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A82559-A98C-4313-B186-30827986171C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A82559-A98C-4313-B186-30827986171C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE5107E6-355D-4513-A9EB-BAF1D032D6AD}
+	EndGlobalSection
+EndGlobal
