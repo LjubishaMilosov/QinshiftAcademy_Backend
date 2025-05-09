@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClasses", "StaticClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClasses.Domain", "StaticClasses.Domain\StaticClasses.Domain.csproj", "{F3881BE3-505E-4552-9D16-C9CB45A09814}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise_01", "Exercise_01\Exercise_01.csproj", "{A498EE2F-1540-458D-B79C-FB01794ECFBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3881BE3-505E-4552-9D16-C9CB45A09814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A498EE2F-1540-458D-B79C-FB01794ECFBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A498EE2F-1540-458D-B79C-FB01794ECFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A498EE2F-1540-458D-B79C-FB01794ECFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A498EE2F-1540-458D-B79C-FB01794ECFBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
