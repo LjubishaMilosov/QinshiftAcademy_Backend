@@ -80,7 +80,7 @@ else
                 //4. add the new order to the user
                 OrdersDb.InsertOrder(currentUser.Id, newOrder);
                 
-                Console.WriteLine("Successfully adde new order");
+                Console.WriteLine("Successfully added new order");
                 
                 currentUser.PrintOrders(); // User is a standard class and PrintOrders is a standard method
                                            // so we can access it using the object (instance) of the class
@@ -92,36 +92,4 @@ else
 
 
 
-//{
-//    Console.WriteLine("Invalid Input");
-//}
-//    else
-//{
-//    Console.WriteLine($"You have chosen user {currentUser.Username}");
-//    Console.WriteLine("Please choose the number of your order:");
-//    int i = 1;
-//    foreach (Order order1 in currentUser.Orders)
-//    {
-//        Console.WriteLine($"Order {i}: {order1.Title} \n");
-//        i++;
-//    }
-//    string input2 = Console.ReadLine();
-//    int orderChoice = TextHelper.ValidateInput(input2);
-//    if (orderChoice == -1)
-//    {
-//        Console.WriteLine("Invalid Input");
-//    }
-//    else
-//    {
-//        Order currentOrder = currentUser.Orders[orderChoice - 1];
-//        if (currentOrder == null)
-//        {
-//            Console.WriteLine("Invalid Input");
-//        }
-//        else
-//        {
-//            Console.WriteLine($"You have chosen order {currentOrder.Title}");
-//            Console.WriteLine($"The status of the order is: {currentOrder.Status}");
-//        }
-//    }
-//}
+

@@ -24,7 +24,7 @@ namespace StaticClasses.Domain.Models
             int orderNumber = 1;
             foreach (Order order in Orders)
             {
-                Console.WriteLine($"Order {orderNumber}: {order.Title} \n");
+                Console.WriteLine($"Order {orderNumber}: {order.Title} ");
                 orderNumber++;
             }
         }
