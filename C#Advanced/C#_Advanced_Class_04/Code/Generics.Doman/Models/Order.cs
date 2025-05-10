@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Generics.Doman.Models
 {
-    class Order
+    public class Order : BaseEntity
     {
+        public string OrderedBy { get; set; }
+        public string Address { get; set; }
+        public override string GetInfo()
+        {
+           return $"{OrderedBy} - {Address}";
+        }
     }
 }
