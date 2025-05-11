@@ -1,4 +1,6 @@
 ﻿using Generics;
+using Generics.Doman;
+using Generics.Doman.Models;
 
 List<string> strings = new List<string>() { "Hello", "G6", "bye" };
 List<int> ints = new List<int>() { 1, 2, 3 };
@@ -20,3 +22,36 @@ Console.WriteLine("=====================================");
 
 GenericHelper<string>.PrintListInfo(strings);
 GenericHelper<int>.PrintListInfo(ints);
+
+// T will be replaced with product for this instance of GenericDb
+GenericDb<Product> productsDb = new GenericDb<Product>();
+
+// T will be replaced with order for this instance of GenericDb
+GenericDb<Order> ordersDb = new GenericDb<Order>();
+
+// GenericDb<int> orderDb = new GenericDb<int>(); ERROR-> int does not inherit from BaseEntity
+
+Product product = new Product();
+product.Id = 1;
+product.Title = "Pizza";
+product.Description = "Delicious pizza";
+productsDb.Add(product);
+
+productsDb.Add(new Product()
+{
+    Id = 2,
+    Title = "Burger",
+    Description = "Delicious burger"
+});
+productsDb.PrintAll();
+
+
+Console.WriteLine("=====================================");
+
+ordersDb.Add(new Order()
+{
+    Id = 1,
+    OrderedBy = "Petko",
+    Address = "Adress1"
+});
+ordersDb.PrintAll();
