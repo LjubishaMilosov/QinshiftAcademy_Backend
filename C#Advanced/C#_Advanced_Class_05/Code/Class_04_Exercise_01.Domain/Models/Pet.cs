@@ -9,5 +9,14 @@ namespace Class_04_Exercise_01.Domain.Models
     {
         public string Name { get; set; }
         public string Age { get; set; }
+        public PetTypeEnum Type { get; set; }
+        public abstract void PrintInfo();
+
+        public Pet(string name, string age, PetTypeEnum type)
+        {
+            Name = name;
+            Age = age;
+            Type = type;
+        }
     }
 }
