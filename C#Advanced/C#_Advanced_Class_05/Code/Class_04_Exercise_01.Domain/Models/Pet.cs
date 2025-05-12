@@ -1,4 +1,6 @@
 ﻿
+using Class_04_Exercise_01.Domain.Enums;
+
 namespace Class_04_Exercise_01.Domain.Models
 {
     //➢ Pet( abstract ) with Name, Type, Age and abstract PrintInfo()
