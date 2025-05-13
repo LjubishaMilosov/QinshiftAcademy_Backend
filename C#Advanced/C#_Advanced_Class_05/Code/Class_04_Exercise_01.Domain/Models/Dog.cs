@@ -4,17 +4,16 @@ namespace Class_04_Exercise_01.Domain.Models
 {
     public class Dog : Pet
     {
-        public string FavoriteFood { get; set; }
+        public string FavouriteFood { get; set; }
         public bool GoodBoy { get; set; }
-
         public override void PrintInfo()
         {
-            Console.WriteLine($"{Name} is of type {Type.ToString()} aged {Age} whose favorite food is {FavoriteFood}");
+            Console.WriteLine($"{Name} is of type {Type.ToString()} aged {Age} whose favourite food is {FavouriteFood}");
         }
-        public Dog(string name, string age, string favoriteFood, bool goodBoy)
-            : base(name, age, PetTypeEnum.Dog)
+
+        public Dog(string name, int age, string favouriteFood, bool goodBoy) : base(name, age, PetTypeEnum.Dog)
         {
-            FavoriteFood = favoriteFood;
+            FavouriteFood = favouriteFood;
             GoodBoy = goodBoy;
         }
     }
