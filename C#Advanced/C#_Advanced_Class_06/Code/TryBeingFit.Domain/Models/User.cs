@@ -1,5 +1,4 @@
 ﻿using TryBeingFit.Domain.Enums;
-
 namespace TryBeingFit.Domain.Models
 {
     public abstract class User : BaseEntity
