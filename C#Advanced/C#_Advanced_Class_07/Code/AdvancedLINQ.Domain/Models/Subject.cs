@@ -10,8 +10,9 @@ namespace AdvancedLINQ.Domain.Models
         public AcademyTypeEnum AcademyType { get; set; }
 
         public Subject() { }
-        public Subject(string title, int modules, int studentAttending, AcademyTypeEnum academyType)
+        public Subject(int id, string title, int modules, int studentAttending, AcademyTypeEnum academyType)
         {
+            Id = id;
             Title = title; 
             Modules = modules; 
             StudentsAttending = studentAttending; 

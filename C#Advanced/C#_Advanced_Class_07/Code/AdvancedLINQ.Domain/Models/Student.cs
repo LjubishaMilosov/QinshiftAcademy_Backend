@@ -1,18 +1,19 @@
 ﻿namespace AdvancedLINQ.Domain.Models
 {
-    public class Students : BaseEntity
+    public class Student : BaseEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
         public bool IsPartTime { get; set; }
         public List<Subject> Subjects { get; set; }
-        public Students() 
+        public Student() 
         {
             Subjects = new List<Subject>();
         }
-        public Students(string firstName, string lastName, int age, bool isPartTime)
+        public Student(int id, string firstName, string lastName, int age, bool isPartTime)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
