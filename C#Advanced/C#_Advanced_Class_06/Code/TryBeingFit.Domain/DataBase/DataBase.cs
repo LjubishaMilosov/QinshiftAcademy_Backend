@@ -9,12 +9,12 @@ namespace TryBeingFit.Domain.DataBase
         //we mark the List private because we do not want anyone from outside to be able to access and modify th items.
         //we will want to use the methods to manipulate the list
         private List<T> items { get; set; } = new List<T>();
-        public int Id { get; set; } 
+        public int LastUsedId { get; set; } 
 
         public DataBase()
         {
             items = new List<T>();
-            Id = 1;  // we do not have the db identity, so will need to manually increment the id
+            LastUsedId = 1;  // we do not have the db identity, so will need to manually increment the id
         }
         public List<T> GetAll()
         {
@@ -29,20 +29,31 @@ namespace TryBeingFit.Domain.DataBase
             {
                 throw new NullReferenceException($"Entity wit id {id} was not found in the db");
             }
+            return item; // here we need to return the item with the given id
         }
 
         public int Insert(T item)
         {
-          //  item.Id = LasUsedId; // here we need to set the id of the item to the current id and increment it for the next item
-           // LastUsedId++;
-           
-            items.Add(item); // here we need to add the item to the list
+            //item.Id = LastUsedId             
+            //LastUsedId = LastUsedId + 1
+
+            //item.Id = LastUsedId++ => 1. item.Id = LastUsedId 2. LastUsedId = LastUsedId + 1
+            //item.Id = ++LastUsedId => 1. LastUsedId = LastUsedId + 1  1. item.Id = LastUsedId
+            item.Id = LastUsedId;
+            LastUsedId++;   //we set the id property of the item and then we increment the value of the property Id
+            items.Add(item);
             return item.Id;
 
         }
 
         public void RemoveById(int id)
         {
+            //T item = items.FirstOrDefault(x => x.Id == id);
+            ////validation
+            //if (item == null)
+            //{
+            //    throw new NullReferenceException($"Entity with id {id} was not found in the db");
+            //}
             T item = GetById(id);
             items.Remove(item); // here we need to remove the item from the list
         }
