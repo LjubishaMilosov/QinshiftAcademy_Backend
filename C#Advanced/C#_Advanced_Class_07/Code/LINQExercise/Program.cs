@@ -53,3 +53,81 @@ List<Person> people = new List<Person>()
     new Person("Cristofer", "Stanley", 28, Job.Dentist)
     { Dogs = new List<Dog>() {dogs[9], dogs[14], dogs[15] } }
 };
+
+//Find and print all persons firstnames starting with 'R', ordered by Age - DESCENDING ORDER
+List<string> firstNames = people.Where(x => x.FirstName.StartsWith("R")) //filter
+                                 .OrderByDescending(x => x.Age) //order
+                                 .Select(x => x.FirstName) //get what you need from the object
+                                                           //.OrderByDescending(x => x.Age) //we can not order by Age here, because here we already selected only the first name, so here we have a List<string>
+                                 .ToList();
+
+foreach (var name in firstNames)
+{
+    Console.WriteLine(name);
+}
+
+//Find and print all brown dogs names and ages older than 3 years, ordered by Age - ASCENDING ORDER
+List<string> brownDogsInfo = dogs.Where(x => x.Age > 3 && x.Color == "Brown")
+                                .OrderBy(x => x.Age)
+                                .Select(x => $"{x.Name} {x.Age}")
+                                .ToList();
+
+//Find and print all persons with more than 2 dogs, ordered by Name - DESCENDING ORDER
+List<Person> peopleWithMoreThanTwoDogs = people.Where(x => x.Dogs.Count > 2)
+                                                .OrderByDescending(x => x.FirstName)
+                                                .ToList();
+Console.WriteLine("People with more than 2 dogs:");
+foreach (var person in peopleWithMoreThanTwoDogs)
+{
+    Console.WriteLine($"{person.FirstName} - {person.Dogs.Count} dogs");
+}
+
+//Find and print all Freddy`s dogs names older than 1 year
+//FirstWay
+List<string> freddysDogsResult = people.First(x => x.FirstName == "Freddy") //here we only have one person object
+                                       .Dogs //so we can access the persons dogs list
+                                       .Where(x => x.Age > 1) //filter the dogs
+                                       .Select(x => x.Name) //get only the names
+                                       .ToList();
+Console.WriteLine("Freddy's dogs older than 1:");
+foreach (var dogName in freddysDogsResult)
+{
+    Console.WriteLine(dogName);
+}
+
+//SecondWay
+Person freddy = people.First(x => x.FirstName == "Freddy");
+List<Dog> freddysDogs = freddy.Dogs;
+List<string> freddyResult = freddysDogs.Where(x => x.Age > 1) //filter the dogs
+                                       .Select(x => x.Name) //get only the names
+                                       .ToList();
+
+Console.WriteLine("Freddy's dogs older than 1:");
+foreach (var name in freddyResult)
+{
+    Console.WriteLine(name);
+}
+
+
+//Find and print Nathen`s first dog
+Dog nathensDog = people.First(x => x.FirstName == "Nathen")
+                        .Dogs
+                        .First();
+Console.WriteLine($"Nathen's first dog is: {nathensDog.Name}, Age: {nathensDog.Age}");
+
+
+//Find and print all white dogs names from Cristofer, Freddy, Erin and Amelia, ordered by Name - ASCENDING ORDER
+List<string> whiteDogsNames = people.Where(x => x.FirstName == "Cristofer" || x.FirstName == "Freddy"
+                                           || x.FirstName == "Erin" || x.FirstName == "Amelia")
+                                     .SelectMany(x => x.Dogs) //list of dogs from Cristofer,Fredyy etc all in one list
+                                     .Where(x => x.Color == "White")
+                                     .OrderBy(x => x.Name)
+                                     //DistinctBy(x => x.Name) if we want to distinct by a property, we need to do it before the select
+                                     .Select(x => x.Name)
+                                     //.Distinct() //here we can use only distibct because we already have a list of strings that ewe can distinct
+                                     .ToList();
+Console.WriteLine("White dogs owned by Cristofer, Freddy, Erin, or Amelia:");
+foreach (var name in whiteDogsNames)
+{
+    Console.WriteLine(name);
+}
