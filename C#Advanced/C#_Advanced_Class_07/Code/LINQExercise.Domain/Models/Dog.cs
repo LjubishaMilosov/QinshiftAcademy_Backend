@@ -11,11 +11,11 @@ namespace LINQExercise.Domain.Models
 
         public BreedEnum Breed { get; set; }
 
-        public Dog(string name, int age, string color, BreedEnum breed)
+        public Dog(string name, string color, int age,  BreedEnum breed)
         {
             Name = name;
-            Age = age;
             Color = color;
+            Age = age;
             Breed = breed;
         }
     }
