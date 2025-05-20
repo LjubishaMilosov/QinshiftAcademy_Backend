@@ -1,6 +1,4 @@
-﻿
-
-using Class_08_Events.Enums;
+﻿using Class_08_Events.Enums;
 
 namespace Class_08_Events.Models
 {
@@ -10,29 +8,26 @@ namespace Class_08_Events.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public int Age { get; set; }
-        public ProductType FavoriteProductType { get; set; }
+        public ProductType FavouriteProductType { get; set; }
 
-        public User (int id, string name, string email, int age, ProductType favoriteProductType)
+        public User(int id, string name, string email, int age, ProductType favouriteProductType)
         {
             Id = id;
             Name = name;
             Email = email;
             Age = age;
-            FavoriteProductType = favoriteProductType;
+            FavouriteProductType = favouriteProductType;
         }
 
+        // This method is called when the user receives a promotion.
+        // It prints the promotion details and checks if it matches the user's favorite product type.
         public void ReadPromotion(ProductType productType)
         {
-            Console.WriteLine($"Mr/Mrs: {Name}, the products of type {productType} are on promotion");
-            if(productType == FavoriteProductType)
+            Console.WriteLine($"\nMr/Mrs: {Name}, the products of type {productType} are on sale !!!");
+            if (productType == FavouriteProductType)
             {
-                Console.WriteLine($"Mr/Mrs: {Name}, the products of type {productType} are on promotion and you are interested in them");
-            }
-            else
-            {
-                Console.WriteLine($"Mr/Mrs: {Name}, the products of type {productType} are on promotion but you are not interested in them");
+                Console.WriteLine("MY FAVOURITE PRODUCTS YEEY!");
             }
         }
-
     }
 }
