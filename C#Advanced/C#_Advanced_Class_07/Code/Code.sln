@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedLINQ.Domain", "Adva
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedLINQ", "AdvancedLINQ\AdvancedLINQ.csproj", "{6021D1F5-469E-4699-AC7D-454412D112D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQExercise", "LINQExercise\LINQExercise.csproj", "{862AE6A5-4946-499E-B867-F171805D4261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQExercise.Domain", "LINQExercise.Domain\LINQExercise.Domain.csproj", "{8E518F5D-138B-4FEA-AE1E-B03B3FA7EB7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{6021D1F5-469E-4699-AC7D-454412D112D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6021D1F5-469E-4699-AC7D-454412D112D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6021D1F5-469E-4699-AC7D-454412D112D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862AE6A5-4946-499E-B867-F171805D4261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862AE6A5-4946-499E-B867-F171805D4261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862AE6A5-4946-499E-B867-F171805D4261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862AE6A5-4946-499E-B867-F171805D4261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E518F5D-138B-4FEA-AE1E-B03B3FA7EB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E518F5D-138B-4FEA-AE1E-B03B3FA7EB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E518F5D-138B-4FEA-AE1E-B03B3FA7EB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E518F5D-138B-4FEA-AE1E-B03B3FA7EB7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
