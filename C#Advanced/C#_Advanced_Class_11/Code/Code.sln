@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_10_Exercise_01", "Cla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{231BF886-5A1E-4410-A4BC-7FA3B7666A16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisposingClasses", "DisposingClasses\DisposingClasses.csproj", "{64506DFB-87DA-40F3-817C-A0879D76ADF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{231BF886-5A1E-4410-A4BC-7FA3B7666A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{231BF886-5A1E-4410-A4BC-7FA3B7666A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{231BF886-5A1E-4410-A4BC-7FA3B7666A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64506DFB-87DA-40F3-817C-A0879D76ADF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64506DFB-87DA-40F3-817C-A0879D76ADF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64506DFB-87DA-40F3-817C-A0879D76ADF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64506DFB-87DA-40F3-817C-A0879D76ADF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
