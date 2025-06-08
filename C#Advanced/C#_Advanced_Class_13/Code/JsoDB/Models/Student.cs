@@ -1,4 +1,4 @@
-﻿namespace JsonDB.Models
+﻿namespace JsonDb.Models
 {
     public class Student : BaseEntity
     {
@@ -7,8 +7,7 @@
         public int Age { get; set; }
         public override string GetInfo()
         {
-            return $" {FirstName} {LastName} - {Age}";
+            return $"{FirstName} {LastName} - {Age}";
         }
     }
-
 }

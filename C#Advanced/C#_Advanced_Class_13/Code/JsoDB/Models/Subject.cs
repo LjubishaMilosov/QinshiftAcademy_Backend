@@ -1,4 +1,5 @@
-﻿namespace JsonDB.Models
+﻿
+namespace JsonDb.Models
 {
     public class Subject : BaseEntity
     {
@@ -7,7 +8,7 @@
         public int NumberOfModules { get; set; }
         public override string GetInfo()
         {
-            return $"{Title} {Description}. It has {NumberOfModules} number of modules";
+            return $"{Title} - {Description}. It has {NumberOfModules} number of modules";
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace JsonDB.Models
+﻿namespace JsonDb.Models
 {
     public  abstract class BaseEntity
     {
-        public int Iint { get; set; }
+        public int Id { get; set; }
         public abstract string GetInfo();
     }
 }
