@@ -1,5 +1,4 @@
 ﻿using JsonDb.Models;
-using JsonDB.Models;
 using Newtonsoft.Json;
 
 namespace JsonDb
