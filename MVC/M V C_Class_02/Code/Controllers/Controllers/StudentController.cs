@@ -53,5 +53,31 @@ namespace Controllers.Controllers
         {
             return students;
         }
+
+        // with route params
+        [HttpGet("{id}")] 
+        public Student GetStudentById(int id)
+        {
+            return students.FirstOrDefault(x => x.Id == id);
+        }
+
+        [Route("byId/{id}")] // another way to specify the route
+        public Student GetStudentBtIdWithRouteText(int id)
+        {
+            return students.FirstOrDefault(x => x.Id ==id);
+        }
+
+        [Route("byId/constraint/{id:int}")] // route constraint: id must be an integer
+        public Student GetStudentByIdWithConstraint(int id)
+        {
+            return students.FirstOrDefault(x => x.Id == id);
+        }
+
+        [Route("{id}/{name}")] // multiple route parameters
+        public Student GetStudentByIdAndNameMultipleParams(int id, string name)
+        {
+            return students.FirstOrDefault(x => x.Id == id && x.FirstName == name);
+        }
+
     }
 }
