@@ -30,5 +30,15 @@ namespace DemoApp.Controllers
             return NotFound();
         }
 
+        public IActionResult GetStudentDetails(int id)
+        {
+            var studentDetails = _studentService.GetStudentWithCourse(id); //here the service returns StudentWithCourseDto? so our controller does not have a direct connection with the db nor with the domain model
+            if (studentDetails != null)
+            {
+                return Json(studentDetails);
+            }
+            return Content("Student not found");
+        }
+
     }
 }
