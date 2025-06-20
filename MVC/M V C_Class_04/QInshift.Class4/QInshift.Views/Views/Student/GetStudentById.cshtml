@@ -1,0 +1,26 @@
+﻿@model StudentCourseViewModel
+
+
+
+@{
+	ViewData["Title"] = "Student Details";
+}
+
+<h2 class="text-warning"> Get student by Id!</h2>
+
+@if (Model is null)
+{
+	<h2 class="text-danger"> No Student found !</h2>
+}
+else
+{
+	<ul>
+		<li><b>FirstName:</b> @Model.Firstname</li>
+		<li><b>LastName:</b> @Model.Lastname</li>
+		<li><b>Age:</b> @Model.Age</li>
+		<li><b>Is18AndAbove:</b> @(Model.Age > 18 ? "Yes" : "No")</li>
+		<li><b>Course Name:</b> @Model.CourseName</li>
+		<li><b>Number Of Classes:</b> @Model.NumberOfClasses</li>
+	</ul>
+}
+
