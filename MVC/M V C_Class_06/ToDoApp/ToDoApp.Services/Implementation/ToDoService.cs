@@ -9,13 +9,19 @@ namespace ToDoApp.Services.Implementation
     public class ToDoService : IToDoService
     {
         private readonly IRepository<ToDo> _toDoRepository;
+        private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<Status> _statusRepository;
 
-        public ToDoService(IRepository<ToDo> toDoRepository)
+        public ToDoService(IRepository<ToDo> toDoRepository, 
+                           IRepository<Category> categoryRepository,
+                           IRepository<Status> statusRepository)
         {
             //this way we need to create a concrete instance
             //this way our class is tightly coupled to a concrete impl
             //_toDoRepository = new ToDoRepository();
             _toDoRepository = toDoRepository;
+            _categoryRepository = _categoryRepository;
+            _statusRepository
         }
         public List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId)
         {
@@ -24,10 +30,29 @@ namespace ToDoApp.Services.Implementation
             List<ToDo> todos = _toDoRepository.GetAll();
 
             //filter
-            if(categoryId.HasValue && )
+            if(categoryId.HasValue && categoryId.Value > 0)
             {
-                todosFromDb = todosFromDb.Where(t => t.CategoryId == categoryId.Value).ToList();
+                todos = todos.Where(t => t.CategoryId == categoryId.Value).ToList();
             }
+            if ((statusId.HasValue && statusId.Value > 0))
+            {
+                todos = todos.Where(t => t.StatusId == statusId.Value).ToList();
+            }
+
+            // we need to map the domain model to view model
+            var result = new List<ToDosViewModel>();
+            foreach(ToDo todo in todos)
+            {
+                result.Add(new ToDosViewModel
+                {
+                    Id = todo.Id,
+                    Description = todo.Description,
+                    DueDate = todo.DueDate,
+                    CategoryName = _categoryRepository.GetById(todo.CategoryId)?.Name ?? string.Empty,
+                    StatusName = _statusRepository.GetById(todo.StatusId)?.Name ?? string.Empty
+                });
+            }
+            return result;
         }
     }
 }
