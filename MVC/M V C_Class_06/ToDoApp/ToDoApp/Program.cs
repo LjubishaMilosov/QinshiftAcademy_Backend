@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.DataProtection.Repositories;
 using ToDoApp.DataAccess.Implementation;
 using ToDoApp.DataAccess.Interfaces;
 using ToDoApp.Domain;
+using ToDoApp.Services.Implementation;
+using ToDoApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +28,9 @@ builder.Services.AddTransient<IRepository<Category>, CategoryRepository>();
 builder.Services.AddTransient<IRepository<Status>, StatusRepository>();
 #endregion
 
-
+#region Register Services
+builder.Services.AddTransient<IToDoService, ToDoService>();
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

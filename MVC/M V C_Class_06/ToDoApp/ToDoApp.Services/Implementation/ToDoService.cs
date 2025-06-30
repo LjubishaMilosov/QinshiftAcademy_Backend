@@ -20,8 +20,8 @@ namespace ToDoApp.Services.Implementation
             //this way our class is tightly coupled to a concrete impl
             //_toDoRepository = new ToDoRepository();
             _toDoRepository = toDoRepository;
-            _categoryRepository = _categoryRepository;
-            _statusRepository
+            _categoryRepository = categoryRepository;
+            _statusRepository = statusRepository;
         }
         public List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId)
         {
