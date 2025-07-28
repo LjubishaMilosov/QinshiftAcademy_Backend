@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Domain", "ToDoApp.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.DataAccess", "ToDoApp.DataAccess\ToDoApp.DataAccess.csproj", "{8E4868D8-4BC3-4200-A298-F86CA32474C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Services", "ToDoApp.Services\ToDoApp.Services.csproj", "{A2CEC322-B893-40D4-B74B-EE8A5B9F60A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Models", "ToDOApp.Models\ToDoApp.Models.csproj", "{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8E4868D8-4BC3-4200-A298-F86CA32474C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E4868D8-4BC3-4200-A298-F86CA32474C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E4868D8-4BC3-4200-A298-F86CA32474C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2CEC322-B893-40D4-B74B-EE8A5B9F60A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CEC322-B893-40D4-B74B-EE8A5B9F60A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CEC322-B893-40D4-B74B-EE8A5B9F60A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CEC322-B893-40D4-B74B-EE8A5B9F60A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

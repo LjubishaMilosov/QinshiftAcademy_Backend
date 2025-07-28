@@ -1,7 +1,14 @@
+using ToDoApp.DataAccess.Implementation;
+using ToDoApp.DataAccess.Interfaces;
+using ToDoApp.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+#region Register Repositories
+builder.Services.AddTransient<IRepository<ToDo>, ToDoRepository > ();
+#endregion
 
 var app = builder.Build();
 

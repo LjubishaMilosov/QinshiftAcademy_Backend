@@ -2,9 +2,9 @@
 
 namespace ToDoApp.DataAccess.Interfaces
 {
-    interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
-        // CRUD methods for accesing the database
+        //CRUD methods for accessing the db
         List<T> GetAll();
         T GetById(int id);
         void Create(T entity);
