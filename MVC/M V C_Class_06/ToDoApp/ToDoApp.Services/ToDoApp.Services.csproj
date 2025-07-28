@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ToDoApp.DataAccess\ToDoApp.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoApp.Domain\ToDoApp.Domain.csproj" />
+    <ProjectReference Include="..\ToDoApp.Mapper\ToDoApp.Mapper.csproj" />
     <ProjectReference Include="..\ToDoApp.Models\ToDoApp.Models.csproj" />
   </ItemGroup>
 

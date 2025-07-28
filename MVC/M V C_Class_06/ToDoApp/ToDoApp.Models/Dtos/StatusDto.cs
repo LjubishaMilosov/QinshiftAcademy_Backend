@@ -1,5 +1,4 @@
-﻿
-namespace ToDoApp.Models.Dtos
+﻿namespace ToDoApp.Models.Dtos
 {
     public class StatusDto
     {

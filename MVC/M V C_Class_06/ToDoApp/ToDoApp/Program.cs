@@ -30,6 +30,7 @@ builder.Services.AddTransient<IRepository<Status>, StatusRepository>();
 
 #region Register Services
 builder.Services.AddTransient<IToDoService, ToDoService>();
+builder.Services.AddTransient<IFilterService, FilterService>();
 #endregion
 var app = builder.Build();
 
