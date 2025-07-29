@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDoApp.DataAccess\ToDoApp.DataAccess.csproj" />
+    <ProjectReference Include="..\ToDoApp.Services\ToDoApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

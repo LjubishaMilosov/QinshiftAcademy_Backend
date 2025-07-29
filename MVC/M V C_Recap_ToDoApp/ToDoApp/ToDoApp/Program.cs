@@ -1,6 +1,7 @@
 using ToDoApp.DataAccess.Implementation;
 using ToDoApp.DataAccess.Interfaces;
 using ToDoApp.Domain;
+using ToDoApp.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 #region Register Repositories
 builder.Services.AddTransient<IRepository<ToDo>, ToDoRepository > ();
+
+builder.Services.AddTransient<IRepository<Category>, CategoryRepository>();
+builder.Services.AddTransient<IRepository<Status>, StatusRepository>();
+#endregion
+
+#region Register Services
+builder.Services.AddTransient<ToDoService, ToDoService>();
 #endregion
 
 var app = builder.Build();
