@@ -1,5 +1,12 @@
-﻿﻿@using ToDoApp.Models.ViewModels
+﻿@using ToDoApp.Models.Dtos
+﻿@using ToDoApp.Models.ViewModels
 @model List<ToDosViewModel>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Partial("~/Views/ToDo/Partial/_FilterPartial.cshtml", (FilterDto)ViewBag.Filter)
+        </div>
+    </div>
 
 <div class="row">
     <div class="col-md-12">
