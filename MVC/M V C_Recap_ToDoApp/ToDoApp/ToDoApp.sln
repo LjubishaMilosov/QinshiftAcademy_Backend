@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Services", "ToDoApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Models", "ToDOApp.Models\ToDoApp.Models.csproj", "{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Mapper", "ToDOApp.Mapper\ToDoApp.Mapper.csproj", "{489EFA7E-BFD1-4422-98E7-B5C3DCB5A3A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA926C7-514F-4A4B-A9EE-E7F252EA97E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{489EFA7E-BFD1-4422-98E7-B5C3DCB5A3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{489EFA7E-BFD1-4422-98E7-B5C3DCB5A3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{489EFA7E-BFD1-4422-98E7-B5C3DCB5A3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{489EFA7E-BFD1-4422-98E7-B5C3DCB5A3A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

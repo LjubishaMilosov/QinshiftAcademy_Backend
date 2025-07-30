@@ -2,6 +2,7 @@ using ToDoApp.DataAccess.Implementation;
 using ToDoApp.DataAccess.Interfaces;
 using ToDoApp.Domain;
 using ToDoApp.Services.Implementation;
+using ToDoApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddTransient<IRepository<Status>, StatusRepository>();
 
 #region Register Services
 builder.Services.AddTransient<ToDoService, ToDoService>();
+builder.Services.AddTransient<IFilterService, FilterService>();
 #endregion
 
 var app = builder.Build();
