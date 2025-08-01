@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModelBindingsAndDataAnnotations.Models.ViewModels;
 using ModelBinidingsAndDataAnnotations.Database;
 using ModelBinidingsAndDataAnnotations.Helpers;
 using ModelBinidingsAndDataAnnotations.Models.ViewModels;
@@ -24,6 +25,26 @@ namespace ModelBindingsAndDataAnnotations.Controllers
             StudentDetailsViewModel studentDetailsViewModel = student.MapToStudentDetailsVM();
             return View("StudentDetails", studentDetailsViewModel); //return the view named StudentDetails
         }
+
+        //First way - using multiple query params
+        //[HttpGet("filterBy")] // /students/filterBy?fullname=Petko Petkovski&age=31
+
+        //public IActionResult GetStudentsByQueryFilter([FromQuery] string fullname, [FromQuery] int age)
+        //{
+        //    var student = StaticDb.Students.FirstOrDefault(x => x.GetFullName() == fullname && (DateTime.Now.Year - x.DateOfBirth.Year) == age);
+        //    return View("StudentDetails", student.MapToStudentDetailsVM());
+        //}
+
+        //Second way - usina filter model
+        [HttpGet("filterBy")] // /students/filterBy?fullname=Petko Petkovski&age=31
+
+        public IActionResult GetStudentsByQueryFilter([FromQuery] StudentFilterViewModel filter)
+        {
+            var student = StaticDb.Students.FirstOrDefault(x => x.GetFullName() == filter.Fullname && (DateTime.Now.Year - x.DateOfBirth.Year) == filter.Age);
+            return View("StudentDetails", student.MapToStudentDetailsVM());
+        }
+
+   
     }
 }
 
