@@ -44,7 +44,24 @@ namespace ModelBindingsAndDataAnnotations.Controllers
             return View("StudentDetails", student.MapToStudentDetailsVM());
         }
 
-   
+        [HttpGet("create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("create")]
+        public IActionResult Create([FromForm] CreateStudentViewModel createStudentViewModel)
+        {
+
+            //ModelState.IsValid checks all the data annotations and validation attributes in CreateStudentViewModel and returns true if they are valid and false if they are not valid
+            if (ModelState.IsValid)
+            {
+                StaticDb.Students.Add(createStudentViewModel.ToStudent());
+                return RedirectToAction("Index"); //we are telling this action to call the Index action
+            }
+
+            return View(createStudentViewModel); //if model is not valid, return the view with the validation errors
+        }
     }
 }
-
