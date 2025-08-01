@@ -1,4 +1,5 @@
-﻿using ModelBinidingsAndDataAnnotations.Database;
+﻿using ModelBindingsAndDataAnnotations.Models.ViewModels;
+using ModelBinidingsAndDataAnnotations.Database;
 using ModelBinidingsAndDataAnnotations.Models.Domain;
 using ModelBinidingsAndDataAnnotations.Models.ViewModels;
 
@@ -29,17 +30,17 @@ namespace ModelBinidingsAndDataAnnotations.Helpers
             };
         }
 
-        //        public static Student ToStudent(this CreateStudentViewModel createStudentViewModel)
-        //        {
-        //            return new Student
-        //            {
-        //                Id = StaticDb.Students.LastOrDefault().Id + 1,
-        //                Email = createStudentViewModel.Email,
-        //                DateOfBirth = createStudentViewModel.DateOfBirth,
-        //                FirstName = createStudentViewModel.FirstName,
-        //                LastName = createStudentViewModel.LastName,
-        //                PhoneNumber = createStudentViewModel.PhoneNumber
-        //            };
-        //        }
+        public static Student ToStudent(this CreateStudentViewModel createStudentViewModel)
+        {
+            return new Student
+            {
+                Id = StaticDb.Students.LastOrDefault().Id + 1,
+                Email = createStudentViewModel.Email,
+                DateOfBirth = createStudentViewModel.DateOfBirth,
+                FirstName = createStudentViewModel.FirstName,
+                LastName = createStudentViewModel.LastName,
+                PhoneNumber = createStudentViewModel.PhoneNumber
+            };
+        }
     }
 }
