@@ -4,7 +4,7 @@ namespace ToDoApp.Services.Interfaces
 {
     public interface IToDoService
     {
-        // categoryId and statusIdare optional parameters
-        List<ToDosViewModel>GetAllTodos(int? categoryId, int? statusId);
+        //categoryId and statusId are optional - we can filter, but we don't always have to
+        List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId);
     }
 }

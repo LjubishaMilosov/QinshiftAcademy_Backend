@@ -16,16 +16,15 @@ namespace ToDoApp.Services.Implementation
             _categoryRepository = categoryRepository;
             _statusRepository = statusRepository;
         }
+
         public List<CategoryDto> GetCategories()
         {
-            return _categoryRepository.GetAll()
-                .Select(x => x.Map()).ToList();
+            return _categoryRepository.GetAll().Select(x => x.Map()).ToList(); //we need to add a reference to the mapper project
         }
 
         public List<StatusDto> GetStatuses()
         {
-            return _statusRepository.GetAll()
-                .Select(x => x.Map()).ToList();
+            return _statusRepository.GetAll().Select(x => x.Map()).ToList();
         }
     }
 }
