@@ -67,5 +67,15 @@ namespace ToDoApp.Services.Implementation
                 _toDoRepository.Update(todo);
             }
         }
+
+        public void RemoveAllCompleted()
+        {
+            var completedToDos = _toDoRepository.GetAll()
+                .Where(x => x.StatusId == 2).ToList();
+            foreach (var todo in completedToDos)
+            {
+                _toDoRepository.Delete(todo.Id);
+            }
+        }
     }
 }

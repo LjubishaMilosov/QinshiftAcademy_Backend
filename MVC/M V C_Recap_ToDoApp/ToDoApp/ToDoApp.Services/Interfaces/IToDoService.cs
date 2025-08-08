@@ -7,5 +7,6 @@ namespace ToDoApp.Services.Interfaces
         //categoryId and statusId are optional - we can filter, but we don't always have to
         List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId);
         void MarkComplete(int id);
+        void RemoveAllCompleted();
     }
 }
