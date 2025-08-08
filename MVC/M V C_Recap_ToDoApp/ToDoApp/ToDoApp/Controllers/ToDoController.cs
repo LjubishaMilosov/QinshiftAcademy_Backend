@@ -54,5 +54,11 @@ namespace ToDoApp.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult MarkComplete(int id)
+        {
+            _todoService.MarkComplete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

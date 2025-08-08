@@ -56,5 +56,16 @@ namespace ToDoApp.Services.Implementation
 
             return result;
         }
+
+        public void MarkComplete(int id)
+        {
+            var todo = _toDoRepository.GetById(id);
+            if (todo != null)
+            {
+                // Assuming "Completed" status has Id = 2 (adjust as needed)
+                todo.StatusId = 2;
+                _toDoRepository.Update(todo);
+            }
+        }
     }
 }

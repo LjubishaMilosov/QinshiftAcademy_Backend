@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccess;
 using ToDoApp.DataAccess.EFFImplementation;
@@ -13,13 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-#region Register DataBase
+#region Register Database
 //First way : hardcoded connection string
 //string connectionString = "Server=.\\SQLEXPRESS;Database=TodoAppDb;Trusted_Connection=True;Integrated Security=true;Encrypt=False;";
 
-//Second way: read connection string from appsettings.json
-string connectionString = builder.Configuration.GetConnectionString("ToDoAppDbConnection");
-
+//Second way - read the connection string from appSettings.json
+string connectionString = builder.Configuration.GetConnectionString("TodoAppConnectionString");
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(connectionString));
 #endregion
 
@@ -33,7 +33,6 @@ builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(
 //this tells the app that anywhere where an instance of IRepository<toDo> is requested, the implem that should be called is ToDoRepository.
 //if we want to change the impl, we only need to specify the new impl here 
 //Transient lifetime: a new instance is created every time it is requested
-
 //builder.Services.AddTransient<IRepository<ToDo>, ToDoRepository>();
 builder.Services.AddTransient<IRepository<ToDo>, EFToDoRepository>();
 

@@ -1,4 +1,4 @@
-﻿﻿@using ToDoApp.Models.ViewModels
+﻿@using ToDoApp.Models.ViewModels
 @using ToDoApp.Models.Dtos
 @model List<ToDosViewModel>
 
@@ -16,17 +16,28 @@
                     <th>DueDate</th>
                     <th>Category</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (ToDosViewModel todo in Model)
                 {
                     string dueDateClass = todo.DueDate < DateTime.Now ? "bg-danger" : "";
-                    <tr>
+                    string completedClass = todo.StatusName == "Completed" ? "table-success text-decoration-line-through" : "";
+                    <tr class="@completedClass">
                         <td>@todo.Description</td>
                         <td class="@dueDateClass">@todo.DueDate</td>
                         <td>@todo.CategoryName</td>
                         <td>@todo.StatusName</td>
+                        <td>
+                            @if (todo.StatusName != "Completed")
+                            {
+                                <form asp-controller="ToDo" asp-action="MarkComplete" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@todo.Id" />
+                                    <button type="submit" class="btn btn-success btn-sm">Mark Complete</button>
+                                </form>
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
