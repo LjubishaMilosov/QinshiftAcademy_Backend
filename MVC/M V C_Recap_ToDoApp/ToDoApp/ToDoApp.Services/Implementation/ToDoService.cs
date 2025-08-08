@@ -24,6 +24,19 @@ namespace ToDoApp.Services.Implementation
             _categoryRepository = categoryRepository;
             _statusRepository = statusRepository;
         }
+
+        public void AddTodo(CreateTodoViewModel createTodo)
+        {
+            var newTodo = new ToDo
+            {
+                Description = createTodo.Description,
+                CategoryId = createTodo.CategoryId,
+                DueDate = createTodo.DueDate,
+                StatusId = 1
+            };
+            _toDoRepository.Create(newTodo);
+        }
+
         public List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId)
         {
             //get all toDos

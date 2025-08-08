@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ViewModels\AddToDoViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ViewModels\AddToDoViewModel.cscs" />
+  </ItemGroup>
+
 </Project>

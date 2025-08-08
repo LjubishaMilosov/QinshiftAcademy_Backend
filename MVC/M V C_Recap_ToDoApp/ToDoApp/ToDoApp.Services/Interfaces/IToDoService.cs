@@ -8,5 +8,6 @@ namespace ToDoApp.Services.Interfaces
         List<ToDosViewModel> GetAllTodos(int? categoryId, int? statusId);
         void MarkComplete(int id);
         void RemoveAllCompleted();
+        void AddTodo(CreateTodoViewModel createTodo);
     }
 }

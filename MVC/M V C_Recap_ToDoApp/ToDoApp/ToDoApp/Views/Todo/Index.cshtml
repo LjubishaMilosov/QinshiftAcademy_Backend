@@ -5,6 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         @Html.Partial("~/Views/ToDo/Partial/_FilterPartial.cshtml", (FilterDto)ViewBag.Filter)
+        <a asp-controller="ToDo" asp-action="Add" class="btn btn-outline-success mb-2">Add New Todo</a>
     </div>
 </div>
 <div class="row">

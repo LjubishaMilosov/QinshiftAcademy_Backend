@@ -1,0 +1,19 @@
+﻿@using ToDoApp.ViewModels
+@model AddTodoViewModel
+
+<h2>Add Todo</h2>
+<form asp-action="Add" method="post">
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="DueDate" class="form-label"></label>
+        <input asp-for="DueDate" class="form-control" type="date" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Todo</button>
+</form>
