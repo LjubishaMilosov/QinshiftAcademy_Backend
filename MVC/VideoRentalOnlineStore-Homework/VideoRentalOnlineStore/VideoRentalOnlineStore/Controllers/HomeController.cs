@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using VideoRentalOnlineStore.Domain.Models;
+using VideoRentalOnlineStore.Models;
 
 namespace VideoRentalOnlineStore.Controllers
 {
