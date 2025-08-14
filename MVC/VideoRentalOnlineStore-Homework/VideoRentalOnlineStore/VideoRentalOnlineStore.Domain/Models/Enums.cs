@@ -1,4 +1,4 @@
-﻿namespace VideoRentalOnlineStore.Models
+﻿namespace VideoRentalOnlineStore.Domain.Models
 {
     public enum SubscriptionType
     {
