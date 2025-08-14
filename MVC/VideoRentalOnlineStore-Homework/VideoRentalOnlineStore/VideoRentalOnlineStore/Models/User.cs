@@ -1,4 +1,4 @@
-﻿namespace VideoRentalOnlineStore.Domain.Models
+﻿namespace VideoRentalOnlineStore.Models
 {
     public class User
     {

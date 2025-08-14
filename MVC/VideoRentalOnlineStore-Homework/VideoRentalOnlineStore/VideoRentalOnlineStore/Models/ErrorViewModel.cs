@@ -1,4 +1,4 @@
-﻿namespace VideoRentalOnlineStore.Models
+namespace VideoRentalOnlineStore.Models
 {
     public class ErrorViewModel
     {
