@@ -56,7 +56,7 @@ namespace NotesApp.Controllers
         [HttpGet("{number}/movies")] // http://localhost:[port]/api/values/1/movies
         public List<string> GetMovies()
         {
-                       return new List<string>() { "Deadpool", "Joker" };
+            return new List<string>() { "Deadpool", "Joker" };
         }
     }
 }
