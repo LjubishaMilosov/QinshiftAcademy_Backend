@@ -1,7 +1,17 @@
+using VideoRentalOnlineStore.DataAcces.Implementation;
+using VideoRentalOnlineStore.DataAcces.Interfaces;
+using VideoRentalOnlineStore.Services.Implementation;
+using VideoRentalOnlineStore.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region
+builder.Services.AddTransient<IMovieRepository, MovieRepository>();
+builder.Services.AddTransient<IMovieService, MovieService>();
+#endregion
 
 var app = builder.Build();
 
