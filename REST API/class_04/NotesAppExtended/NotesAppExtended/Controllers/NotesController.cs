@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NotesAppExtended.Enums;
 using NotesAppExtended.Models;
+using NotesAppExtended.Models.Enums;
 
 namespace NotesApp.Controllers
 {

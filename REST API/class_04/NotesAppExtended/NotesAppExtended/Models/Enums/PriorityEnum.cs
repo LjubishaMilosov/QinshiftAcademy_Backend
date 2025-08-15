@@ -1,4 +1,4 @@
-﻿namespace NotesAppExtended.Enums
+﻿namespace NotesAppExtended.Models.Enums
 {
     public enum PriorityEnum
     {

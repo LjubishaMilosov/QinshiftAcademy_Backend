@@ -1,6 +1,6 @@
 ﻿namespace NotesAppExtended.Models
 {
-    public class Tag
+    public class Tag : BaseEntity
     {
         public string Name { get; set; }
         public string Color { get; set; }
