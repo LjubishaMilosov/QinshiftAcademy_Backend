@@ -212,5 +212,56 @@ namespace NotesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost]
+        public IActionResult AddNote([FromBody]AddNoteDto  addNoteDto)
+        {
+            try
+            {
+                // validation
+                if (addNoteDto == null)
+                {
+                    return BadRequest("The note cannot be null");
+                }
+                if(string.IsNullOrEmpty(addNoteDto.Text))
+                {
+                    return BadRequest("Each note must contain text");
+                }
+                User userDb = StaticDb.Users.FirstOrDefault(u => u.Id == addNoteDto.UserId);
+                if (userDb == null)
+                {
+                    return NotFound($"The user with id {addNoteDto.UserId} does not exist");
+                }
+                List<Tag> tags = new List<Tag>();  // 1, 2, 3
+                foreach (var tagId in addNoteDto.TagIds)
+                {
+                    Tag tagDb = StaticDb.Tags.FirstOrDefault(t => t.Id == tagId);
+                    if (tagDb == null)
+                    {
+                        return NotFound($"The tag with id {tagId} does not exist");
+                    }
+                    tags.Add(tagDb);
+                }
+                //create
+                Note newNote = new Note
+                {
+                    // if StaticDb.Notes.LastOrDefault() is null, it means there are no notes in the database, so we start from 1
+                    Id = StaticDb.Notes.LastOrDefault()?.Id + 1 ?? 1, // if there are no notes, start from 1
+                    Text = addNoteDto.Text,
+                    Priority = addNoteDto.Priority,
+                    User = userDb,
+                    UserId = userDb.Id,
+                    Tags = tags
+                };
+
+                //write to db
+                StaticDb.Notes.Add(newNote);
+                return StatusCode(StatusCodes.Status201Created, "Note created successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
