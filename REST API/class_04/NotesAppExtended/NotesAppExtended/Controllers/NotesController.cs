@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NotesAppExtended.Models;
+using NotesAppExtended.Models.DTOs;
 using NotesAppExtended.Models.Enums;
 
 namespace NotesApp.Controllers
@@ -10,12 +10,24 @@ namespace NotesApp.Controllers
     public class NotesController : ControllerBase
     {
         [HttpGet] //http://localhost:[port]/api/notes
-        public ActionResult<List<Note>> GetAll()
+        public ActionResult<List<NoteDto>> GetAll()
         {
             try
             {
-                return Ok(StaticDb.Notes);
-
+                //return Ok(StaticDb.Notes);
+                var notesDb = StaticDb.Notes;
+                // Select ke iziterira niz notesDb listata i za sekoj element ke treba da selektira odredeno property.
+                // propertinjata sto ke gi selektira ke bidat vsusnost novo noteDto: 
+                // Select ke iziterira niz notesDb listata i za sekoj note kreira nov NoteDto kade gi mapira svojstvata
+                //the select linq iterates the notesDb list and for each note selects a new NoteDto where it maps the properties
+                var notesDto = notesDb.Select(x => new NoteDto
+                {
+                    Text = x.Text,
+                    Priority = x.Priority,
+                    UserName = $"{x.User.FirstName} {x.User.LastName}",
+                    Tags = x.Tags.Select(t => $"{t.Name} - { t.Color}").ToList()
+                }).ToList();
+                return Ok(notesDto);
             }
             catch (Exception ex)
             {
@@ -44,6 +56,8 @@ namespace NotesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+
 
         [HttpGet("multipleQuery")] //http://localhost:[port]/api/notes/multipleQuery
                                    //http://localhost:[port]/api/notes/multipleQuery?text=gym
