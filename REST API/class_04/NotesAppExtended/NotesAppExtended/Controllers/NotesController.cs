@@ -213,7 +213,7 @@ namespace NotesApp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("addNote")]
         public IActionResult AddNote([FromBody]AddNoteDto  addNoteDto)
         {
             try
@@ -263,5 +263,30 @@ namespace NotesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet("getNotesByUser/{userId}")]
+        public ActionResult<List<NoteDto>> GetNoteByUser(int userId)
+        {
+            try
+            {
+                if(userId == null)
+                {                     
+                    return BadRequest("The userId cannot be null");
+                }
+                var userNote = StaticDb.Notes.Where(n => n.UserId == userId).ToList();
+                var userNotesDtos = userNote.Select(x => new NoteDto
+                {
+                    Text = x.Text,
+                    Priority = x.Priority,
+                    UserName = $"{x.User.FirstName} {x.User.LastName}",
+                    Tags = x.Tags.Select(t => $"{t.Name} - {t.Color}").ToList()
+                }).ToList();
+                return Ok(userNotesDtos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+            }
     }
 }
