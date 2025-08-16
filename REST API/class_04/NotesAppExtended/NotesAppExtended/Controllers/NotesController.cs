@@ -35,21 +35,51 @@ namespace NotesApp.Controllers
             }
         }
 
-        [HttpGet("{index}")] //http://localhost:[port]/api/notes/1
-                             //Here we have a path param that is a part of the route
-        public ActionResult<Note> GetNoteByIndex(int index)
+        //[HttpGet("{index}")] //http://localhost:[port]/api/notes/1
+        //// Here we have a path param that is a part of the route
+        //                     public ActionResult<Note> GetNoteByIndex(int index)
+        //{
+        //    try
+        //    {
+        //        if (index < 0)
+        //        {
+        //            return BadRequest("The index cannot be negative");
+        //        }
+        //        if (index >= StaticDb.Notes.Count)
+        //        {
+        //            return NotFound($"There is no resource on index {index}");
+        //        }
+        //        return Ok(StaticDb.Notes[index]);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
+
+        [HttpGet("{id}")] //http://localhost:[port]/api/notes/1
+                          //Here we have a path param that is a part of the route
+        public ActionResult<NoteDto> GetNoteById(int id)
         {
             try
             {
-                if (index < 0)
+                if (id < 0)
                 {
                     return BadRequest("The index cannot be negative");
                 }
-                if (index >= StaticDb.Notes.Count)
+                Note noteDb = StaticDb.Notes.FirstOrDefault(n => n.Id == id);
+                if (noteDb == null)
                 {
-                    return NotFound($"There is no resource on index {index}");
+                    return NotFound($"The note with id {id} does not exist");
                 }
-                return Ok(StaticDb.Notes[index]);
+                NoteDto noteDto = new NoteDto
+                {
+                    Text = noteDb.Text,
+                    Priority = noteDb.Priority,
+                    UserName = $"{noteDb.User.FirstName} {noteDb.User.LastName}",
+                    Tags = noteDb.Tags.Select(t => $"{t.Name} - {t.Color}").ToList()
+                };
+                return Ok(noteDto);
             }
             catch (Exception ex)
             {
