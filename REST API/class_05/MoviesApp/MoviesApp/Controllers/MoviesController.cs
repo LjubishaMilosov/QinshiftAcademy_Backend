@@ -35,5 +35,36 @@ namespace MoviesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<MovieDto> GetByPathId(int id)
+        {
+            try
+            {
+                // validations
+                if(id <= 0)
+                {
+                    return BadRequest("Bad request, the id cannot be a negative number.");
+                }
+                var movieDb = StaticDb.Movies.FirstOrDefault(m => m.Id == id);
+                if(movieDb == null)
+                {
+                    return NotFound($"Movie with id {id} not found.");
+                }
+                var movieDto = new MovieDto
+                {
+                    Title = movieDb.Title,
+                    Description = movieDb.Description,
+                    Year = movieDb.Year,
+                    Genre = movieDb.Genre
+                };
+                return Ok(movieDto);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }
