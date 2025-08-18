@@ -25,7 +25,7 @@ namespace NotesApp.Controllers
                     Text = x.Text,
                     Priority = x.Priority,
                     UserName = $"{x.User.FirstName} {x.User.LastName}",
-                    Tags = x.Tags.Select(t => $"{t.Name} - { t.Color}").ToList()
+                    Tags = x.Tags.Select(t => $"{t.Name} - {t.Color}").ToList()
                 }).ToList();
                 return Ok(notesDto);
             }
@@ -138,7 +138,7 @@ namespace NotesApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePostNote([FromBody]Note note)
+        public ActionResult CreatePostNote([FromBody] Note note)
         {
             try
             {
@@ -191,30 +191,30 @@ namespace NotesApp.Controllers
         {
             try
             {
-                if(index < 0)
+                if (index < 0)
                 {
                     return BadRequest("The index cannot be negative");
                 }
-                if(index >= StaticDb.Notes.Count)
+                if (index >= StaticDb.Notes.Count)
                 {
                     return NotFound($"There is no note on index {index}");
                 }
                 var noteDb = StaticDb.Notes[index];
-                if(noteDb.Tags == null)
+                if (noteDb.Tags == null)
                 {
                     noteDb.Tags = new List<Tag>();
                 }
                 noteDb.Tags.Add(tag);
                 return StatusCode(StatusCodes.Status204NoContent, "Note updated");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpPost("addNote")]
-        public IActionResult AddNote([FromBody]AddNoteDto  addNoteDto)
+        public IActionResult AddNote([FromBody] AddNoteDto addNoteDto)
         {
             try
             {
@@ -223,7 +223,7 @@ namespace NotesApp.Controllers
                 {
                     return BadRequest("The note cannot be null");
                 }
-                if(string.IsNullOrEmpty(addNoteDto.Text))
+                if (string.IsNullOrEmpty(addNoteDto.Text))
                 {
                     return BadRequest("Each note must contain text");
                 }
@@ -269,8 +269,8 @@ namespace NotesApp.Controllers
         {
             try
             {
-                if(userId == null)
-                {                     
+                if (userId == null)
+                {
                     return BadRequest("The userId cannot be null");
                 }
                 var userNote = StaticDb.Notes.Where(n => n.UserId == userId).ToList();
@@ -287,6 +287,83 @@ namespace NotesApp.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        [HttpPut("updateNote")]
+        public IActionResult Update([FromBody] UpdateNoteDto updateNoteDto)
+        {
+            try
+            {
+                // validations
+                if (updateNoteDto == null)
+                {
+                    return BadRequest("The note cannot be null");
+                }
+                // we ned to find the note we want to update in the db(also check if it exists)
+                Note noteDb = StaticDb.Notes.FirstOrDefault(x => x.Id == updateNoteDto.Id);
+                if (noteDb == null)
+                {
+                    return NotFound($"The note with id {updateNoteDto.Id} does not exist");
+                }
+                User userDb = StaticDb.Users.FirstOrDefault(u => u.Id == updateNoteDto.UserId);
+                if (userDb == null)
+                {
+                    return NotFound($"The user with id {updateNoteDto.UserId} does not exist");
+                }
+                if (string.IsNullOrEmpty(updateNoteDto.Text))
+                {
+                    return BadRequest("Each note must contain text");
+                }
+                if ((int)updateNoteDto.Priority < 1 || (int)updateNoteDto.Priority > 3)
+                {
+                    return BadRequest("Invalid value for priority");
+                }
+                List<Tag> tags = new List<Tag>();
+                foreach (var tagId in updateNoteDto.TagIds)
+                {
+                    Tag tagDb = StaticDb.Tags.FirstOrDefault(t => t.Id == tagId);
+                    if (tagDb == null)
+                    {
+                        return NotFound($"The tag with id {tagId} does not exist");
+                    }
+                    tags.Add(tagDb);
+                }
+                // update the note
+                noteDb.Text = updateNoteDto.Text;
+                noteDb.Priority = updateNoteDto.Priority;
+                noteDb.User = userDb;
+                noteDb.UserId = userDb.Id;
+                noteDb.Tags = tags;
+                
+                return StatusCode(StatusCodes.Status204NoContent, "Note updated successfully");
             }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteById(int id)
+        {
+            try
+            {
+                if(id <= 0)
+                {
+                    return BadRequest("The id cannot be negative or zero");
+                }
+                Note noteDb = StaticDb.Notes.FirstOrDefault(n => n.Id == id);
+                if(noteDb == null)
+                {
+                    return NotFound($"The note with id {id} does not exist");
+                }
+                StaticDb.Notes.Remove(noteDb);
+                return StatusCode(StatusCodes.Status204NoContent, "Note deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
