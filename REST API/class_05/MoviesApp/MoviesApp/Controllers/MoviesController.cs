@@ -174,6 +174,57 @@ namespace MoviesApp.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
+        }[HttpPost("addMovie")] //localhost[port]/api/movies/addMovie
+        // // here we dont have to add anything to the route, because we dont have another httppost method with the same route
+        public IActionResult AddMovie([FromBody] AddMovieDto addMovieDto)  // we use a specific dto because  the future some of the data might change for adding/showing the movies
+        {
+            try
+            {
+                //validaions
+                if (addMovieDto == null)
+                {
+                    return BadRequest("Bad request, the movie cannot be null.");
+                }
+                if (string.IsNullOrEmpty(addMovieDto.Title))
+                {
+                    return BadRequest("Title is required.");
+                }//If description is entered
+                //description was entered                            and it is longer than 250 characters
+                if (!string.IsNullOrEmpty(addMovieDto.Description) && addMovieDto.Description.Length > 250)
+                {
+                    return BadRequest("Description cannot be longer than 250 characters.");
+                    // there is no need to check if year has a null value, because a nu vlue cannot be stored into an int(it can only be stored in int?)
+                }
+                if (addMovieDto.Year <= 0 || addMovieDto.Year > DateTime.Now.Year)
+                {
+                    return BadRequest("Invalid value for year.");
+                }
+                var enumValues = Enum.GetValues(typeof(GenreEnum))  //returns array of the values as type Enum
+                                          .Cast<GenreEnum>()  // we need our specific ype of enum - GenreEnum, not the base Enumtype, so we need to cast the Enum array into GenreEnum - Coedy=1, Action=2 etc.
+                                          .Select(genre => (int)genre)
+                                          .ToList();
+                // genre is nullable, we need .Value to access its aue if it was sen
+                if (!enumValues.Contains((int)addMovieDto.Genre))  // fo eamp, we snt 15 as genre
+                {
+                    return NotFound($"The genre with id {addMovieDto.Genre} was not found");
+                }
+                // if we reach this point, then the dto is valid and we can add it to the db
+                // mapping - we need an instance of Movie class
+                var newMovie = new Movie
+                {
+                    Id = StaticDb.Movies.LastOrDefault().Id + 1, // we can use the count to generate a new id
+                    Title = addMovieDto.Title,
+                    Description = addMovieDto.Description,
+                    Year = addMovieDto.Year,
+                    Genre = addMovieDto.Genre
+                };
+                StaticDb.Movies.Add(newMovie); // we add the new movie to the db
+                return StatusCode(StatusCodes.Status201Created, $"Movie with id {newMovie.Id} was successfully added.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }
