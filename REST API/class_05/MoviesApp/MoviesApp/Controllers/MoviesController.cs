@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoviesApp.Models;
 using MoviesApp.Models.DTOs;
+using MoviesApp.Models.Enum;
 
 namespace MoviesApp.Controllers
 {
@@ -97,6 +99,77 @@ namespace MoviesApp.Controllers
                 };
                 return Ok(movieDto);
             }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("filter")]  //localhost[port]/api/movies/filter
+                                     //localhost[port]/api/movies/filter?genre=1
+                                     //localhost[port]/api/movies/filter?year=2022
+                                     //localhost[port]/api/movies/filter?genre=1&year=2022
+                                     //localhost[port]/api/movies/filter?year=2022&genre=1
+        public ActionResult<List<MovieDto>> FilterMovies(int? genre, int? year)
+        {
+            try
+            {
+                if(genre == null  && year == null) //the user  is allowed to skip the query string params and the route would still be valid,
+                                                   //however from business logic aspect we need at least one param so that we can filter
+                {
+                    return BadRequest("You have to send at least one filter param");
+                }
+                // check if the genre is in the correct range for the genre enum - only when genre has value(a value for genre was sent)
+                if(genre.HasValue)  //HavValue checks if genre is ot null(has value)
+                {
+                    var enumValues = Enum.GetValues(typeof(GenreEnum))  //returns array of the values as type Enum
+                                          .Cast<GenreEnum>()  // we need our specific ype of enum - GenreEnum, not the base Enumtype, so we need to cast the Enum array into GenreEnum - Coedy=1, Action=2 etc.
+                                          .Select(genre => (int)genre)
+                                          .ToList();
+                    // genre is nullable, we need .Value to access its aue if it was sen
+                    if(!enumValues.Contains(genre.Value))  // fo eamp, we snt 15 as genre
+                    {
+                        return NotFound($"The genre with id {genre.Value} was not found");
+                    }
+                }
+
+                if(year == null) // here we can be sure that the genre has value, because we already checked the scenario where both of them dont have values.
+                                 // So, if year does not have value - then genre must have a value
+                {
+                    List<Movie> moviesDbByGenre = StaticDb.Movies.Where(x => (int)x.Genre == genre.Value).ToList();
+
+                    var moviesGenreDto = moviesDbByGenre.Select(x => new MovieDto
+                    {
+                        Description =x.Description,
+                        Genre =x.Genre,
+                        Year =x.Year,
+                        Title = x.Title
+                    });
+                    return Ok(moviesGenreDto);
+                }
+                if(genre == null) // here we can be sure that the year has value, because we already checked the scenario where both of them dont have values.
+                                  // So, if genre does not have value - then year must have a value
+                {
+                    var moviesDbByYear = StaticDb.Movies.Where(x => x.Year == year).ToList();
+                    var moviesYearDto = moviesDbByYear.Select(x => new MovieDto
+                    {
+                        Description = x.Description,
+                        Genre = x.Genre,
+                        Year = x.Year,
+                        Title = x.Title
+                    });
+                    return Ok(moviesYearDto);
+                }
+                List<Movie> moviesDb = StaticDb.Movies.Where(x => (int)x.Genre == genre.Value && x.Year == year).ToList();
+                var moviesDto = moviesDb.Select(x => new MovieDto
+                    {
+                        Description = x.Description,
+                        Genre = x.Genre,
+                        Year = x.Year,
+                        Title = x.Title
+                    });
+                return Ok(moviesDto);
+
+            }  
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
