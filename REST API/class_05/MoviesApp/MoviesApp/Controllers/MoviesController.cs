@@ -284,8 +284,8 @@ namespace MoviesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpDelete("deleteMovie")] //localhost[port]/api/movies/deleteMovie/
-        public IActionResult DeleteMovie(int id)
+        [HttpDelete("delete")] //localhost[port]/api/movies/delete
+        public IActionResult DeleteMovie([FromBody]int id)
         {
             //validations
             if (id <= 0)
@@ -301,5 +301,6 @@ namespace MoviesApp.Controllers
             return StatusCode(StatusCodes.Status204NoContent, $"Movie with id {id} was successfully deleted.");
 
         }
+       
     }
 }
