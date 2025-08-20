@@ -226,5 +226,63 @@ namespace MoviesApp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpPut("updateMovie")] //localhost[port]/api/movies/updateMovie
+        public IActionResult UpdateMovie([FromBody] UpdateMovieDto updateMovieDto)
+        {
+            try 
+            {
+                //validations
+                if (updateMovieDto == null)
+                {
+                    return BadRequest("Bad request, the movie cannot be null.");
+                }// if the updaeMovieDto.Id is null or is a negative value or is a value that does not exist in StaticDb.Movies - the vavlue
+                 // of movieDb will be null, so we can use only this check
+
+                var movieDb = StaticDb.Movies.FirstOrDefault(m => m.Id == updateMovieDto.Id);
+                if (movieDb == null)
+                {
+                    return NotFound($"Movie with id {updateMovieDto.Id} not found.");
+                }
+                // the same rules (requirements) that we had to check when creating a new movie, we also have to check when updating a movie
+                if (string.IsNullOrEmpty(updateMovieDto.Title))
+                {
+                    return BadRequest("Title is required.");
+                }
+                //description was entered                            and it is longer than 250 characters
+                if (!string.IsNullOrEmpty(updateMovieDto.Description) && updateMovieDto.Description.Length > 250)
+                {  
+                    return BadRequest("Description cannot be longer than 250 characters.");
+                }
+                // there is no need to check if year has a null value, because a null value cannot be stored into an int(it can only be stored in int?)
+
+
+                if (updateMovieDto.Year <= 0 || updateMovieDto.Year > DateTime.Now.Year)
+                {
+                    return BadRequest("Invalid value for year.");
+                }
+                var enumValues = Enum.GetValues(typeof(GenreEnum))  //returns array of the values as type Enum
+                                          .Cast<GenreEnum>()  // we need our specific ype of enum - GenreEnum, not the base Enumtype, so we need to cast the Enum array into GenreEnum - Coedy=1, Action=2 etc.
+                                          .Select(genre => (int)genre)
+                                          .ToList();
+                // genre is nullable, we need .Value to access its aue if it was sen
+                if (!enumValues.Contains((int)updateMovieDto.Genre))  // fo eamp, we snt 15 as genre
+                {
+                    return NotFound($"The genre with id {updateMovieDto.Genre} was not found");
+                }
+
+                // mapping
+                movieDb.Title = updateMovieDto.Title;
+                movieDb.Description = updateMovieDto.Description;
+                movieDb.Year = updateMovieDto.Year;
+                movieDb.Genre = updateMovieDto.Genre;
+                
+                return StatusCode(StatusCodes.Status204NoContent, $"Movie with id {movieDb.Id} was successfully updated."); // 204 No Content - we don't have to return anything, just the status code
+               
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }
