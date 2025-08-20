@@ -317,7 +317,28 @@ namespace MoviesApp.Controllers
             StaticDb.Movies.Remove(movieDb); // we remove the movie from the db
             return StatusCode(StatusCodes.Status204NoContent, $"Movie with id {id} was successfully deleted.");
         }
+        //querystring
+        [HttpDelete("delete/query")] //localhost[port]/api/movies/delete/query
+                                     //localhost[port]/api/movies/delete/query?id=1
+        public IActionResult DeleteMovieByRouteId(int? id)
+        {
+            //validations
+            if (id == null)
+            {
+                return BadRequest("Id cannot be null");
+            }
+            if (id <= 0)
+            {
+                return BadRequest("Id cannot be a negative number.");
+            }
+            var movieDb = StaticDb.Movies.FirstOrDefault(m => m.Id == id);
+            if (movieDb == null)
+            {
+                return NotFound($"Movie with id {id} not found.");
+            }
+            StaticDb.Movies.Remove(movieDb); // we remove the movie from the db
+            return StatusCode(StatusCodes.Status204NoContent, $"Movie with id {id} was successfully deleted.");
+        }
 
-        
     }
 }
