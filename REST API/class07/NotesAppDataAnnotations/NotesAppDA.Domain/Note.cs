@@ -4,18 +4,20 @@ using NotesAppDA.Domain.Enums;
 
 namespace NotesAppDA.Domain
 {
+    [Table("Notes")]
     public class Note
     {
-        [Key]
+        [Key] // primary key
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        c
+
+        [Required]
         [StringLength(100)]
         public string Text { get; set; }
         [Required]
         public int UserId { get; set; }
         // Navigation property
-        [ForeignKey("UserId")]  // part1 from the 1 -> many relationship with Note, where UserId is the foreign key
+        [ForeignKey("UserId")]  // part 1 from the 1 -> many relationship with Note, where UserId is the foreign key
         public User User { get; set; }
         [Required]
         public PriorityEnum Priority { get; set; }

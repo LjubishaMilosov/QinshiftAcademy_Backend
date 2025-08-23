@@ -21,8 +21,8 @@ namespace NotesAppDA.Domain
         [MaxLength(50)]
         public string Username { get; set; }
 
-        [InverseProperty("User")]
-        public List<Note> Notes { get; set; }
+        [InverseProperty("User")] // it states the other end of the relationship
+        public List<Note> Notes { get; set; } // 'Many' part from the 1 -> many relationship with User
 
     }
 }
