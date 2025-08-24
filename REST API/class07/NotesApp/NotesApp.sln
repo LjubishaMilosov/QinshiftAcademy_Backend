@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp", "NotesApp\NotesApp.csproj", "{F540B7FF-2CDF-4F95-8EA6-50D2101C2872}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3195DE5B-8DB5-4AB9-AD00-6A504F084A97} = {3195DE5B-8DB5-4AB9-AD00-6A504F084A97}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.Domain", "NotesApp.Domain\NotesApp.Domain.csproj", "{3334FCB1-27BB-44C2-AEFF-503A7CE74912}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.Helpers", "NotesApp.Helpers\NotesApp.Helpers.csproj", "{3195DE5B-8DB5-4AB9-AD00-6A504F084A97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D19AE3A-658E-499E-948B-0DB5BD19390B} = {6D19AE3A-658E-499E-948B-0DB5BD19390B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.DataAccess", "NotesApp.DataAccess\NotesApp.DataAccess.csproj", "{6D19AE3A-658E-499E-948B-0DB5BD19390B}"
 EndProject
