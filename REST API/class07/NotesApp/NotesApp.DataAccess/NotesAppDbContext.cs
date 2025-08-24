@@ -38,12 +38,26 @@ namespace NotesApp.DataAccess
                 .OnDelete(DeleteBehavior.Cascade); // when a User is deleted, all their Notes are also deleted (cascade delete)
             
             //we can configure this relation either way
-            modelBuilder.Entity<User>()  // the entity User
-                .HasMany(x => x.Notes)  // has many Notes
-                .WithOne(x => x.User)  // with one User
-                .HasForeignKey(x => x.UserId);  // the foreign key that connects note to user is UserId
+            //modelBuilder.Entity<User>()  // the entity User
+            //    .HasMany(x => x.Notes)  // has many Notes
+            //    .WithOne(x => x.User)  // with one User
+            //    .HasForeignKey(x => x.UserId);  // the foreign key that connects note to user is UserId
 
+            modelBuilder.Entity<User>()
+                .Property(x => x.FirstName)
+                .HasMaxLength(50);
 
+            modelBuilder.Entity<User>()
+                .Property(x => x.LastName)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Username)
+                .IsRequired()
+                .HasMaxLength(30);
+
+            modelBuilder.Entity<User>()
+                .Ignore(x => x.Age); // we ignore the Age property, so it will not be mapped to a database column
         }
     }
 }
