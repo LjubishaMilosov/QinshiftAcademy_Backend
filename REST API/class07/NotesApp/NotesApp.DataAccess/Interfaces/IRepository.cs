@@ -15,7 +15,7 @@ namespace NotesApp.DataAccess.Interfaces
 
         void Update(T entity); // update
 
-        void Delete(int id); // delete
+        void Delete(T entity); // delete
     }
 
 }

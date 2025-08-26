@@ -47,7 +47,8 @@ namespace NotesApp.DataAccess.Implementation
 
         public void Update(Note entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Notes.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
