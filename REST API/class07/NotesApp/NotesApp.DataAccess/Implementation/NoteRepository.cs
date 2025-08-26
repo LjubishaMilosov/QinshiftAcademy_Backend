@@ -18,12 +18,15 @@ namespace NotesApp.DataAccess.Implementation
         }
         public void Add(Note entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Notes.Add(entity);
+            //_dbContext.Add(entity);
+            _dbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(Note entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Notes.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public List<Note> GetAll()
