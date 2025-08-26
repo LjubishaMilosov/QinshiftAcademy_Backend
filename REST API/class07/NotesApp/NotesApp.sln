@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.Helpers", "NotesAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.DataAccess", "NotesApp.DataAccess\NotesApp.DataAccess.csproj", "{6D19AE3A-658E-499E-948B-0DB5BD19390B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesApp.Services", "NotesApp.Services\NotesApp.Services.csproj", "{E3D53AF6-3F40-4B52-B288-C9BDC9F171D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6D19AE3A-658E-499E-948B-0DB5BD19390B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D19AE3A-658E-499E-948B-0DB5BD19390B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D19AE3A-658E-499E-948B-0DB5BD19390B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3D53AF6-3F40-4B52-B288-C9BDC9F171D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3D53AF6-3F40-4B52-B288-C9BDC9F171D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3D53AF6-3F40-4B52-B288-C9BDC9F171D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3D53AF6-3F40-4B52-B288-C9BDC9F171D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

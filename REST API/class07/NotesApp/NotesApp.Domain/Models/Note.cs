@@ -1,14 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using NotesApp.Domain.Enums;
+﻿using NotesApp.Domain.Enums;
 
 namespace NotesApp.Domain.Models
 {
-    public class Note
+    public class Note : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Text { get; set; }
         public PriorityEnum Priority { get; set; }
         public TagEnum Tag { get; set; }
