@@ -37,12 +37,24 @@ namespace NotesApp.DataAccess.Implementation
             return _dbContext
                  .Notes
                  .Include(n => n.User) // we join Notes table with the users table in order to be able to access info about the users
+                                       // we use join dut to lazy loading being disabled
+                                       // we use Include method to specify the related entity to include in the query results
                  .ToList();
         }
 
         public Note GetById(int id)
         {
-            throw new NotImplementedException();
+            var note = _dbContext.Notes
+                .Include(n => n.User) // we join Notes table with the users table in order to be able to access info about the users
+                                      // we use join dut to lazy loading being disabled
+                                      // we use Include method to specify the related entity to include in the query results
+                .FirstOrDefault(n => n.Id == id); // SELECT * from Notes where Id = id
+
+            if (note == null) 
+            {
+                throw new Exception($"Note with id {id} not found.");
+            }
+            return note;
         }
 
         public void Update(Note entity)
