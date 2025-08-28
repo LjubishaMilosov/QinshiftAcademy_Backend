@@ -35,7 +35,12 @@ namespace NotesApp.DataAccess.Implementation
 
         public User GetById(int id)
         {
-            throw new NotImplementedException();
+            var users =_dbContext.Users.FirstOrDefault(u => u.Id == id); // SELECT * from Users where Id = id
+            if (users == null)
+            {
+                throw new Exception($"User with id {id} not found.");
+            }
+            return users;
         }
 
         public void Update(User entity)
