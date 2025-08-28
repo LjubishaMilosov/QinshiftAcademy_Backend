@@ -29,7 +29,8 @@ namespace NotesApp.DataAccess.Implementation
 
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Users.ToList();
+            // we don't use Include() here because we don't have any navigation properties in the User entity
         }
 
         public User GetById(int id)
@@ -39,7 +40,8 @@ namespace NotesApp.DataAccess.Implementation
 
         public void Update(User entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Users.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
