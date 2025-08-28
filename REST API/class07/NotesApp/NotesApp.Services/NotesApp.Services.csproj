@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementation\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\NotesApp.DataAccess\NotesApp.DataAccess.csproj" />
     <ProjectReference Include="..\NotesApp.DTOs\NotesApp.DTOs.csproj" />
   </ItemGroup>
 
