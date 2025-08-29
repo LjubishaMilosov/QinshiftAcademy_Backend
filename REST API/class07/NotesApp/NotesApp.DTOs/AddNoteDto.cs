@@ -2,12 +2,11 @@
 
 namespace NotesApp.DTOs
 {
-    public class NoteDto
+    internal class AddNoteDto
     {
-        public int UserId { get; set; }
         public String Text { get; set; }
         public PriorityEnum Priority { get; set; }
         public TagEnum Tag { get; set; }
-        public String UserFullName { get; set; }
+        public String UserId { get; set; }
     }
 }
