@@ -52,7 +52,7 @@ namespace NotesApp.DataAccess.Implementation
 
             if (note == null) 
             {
-                throw new Exception($"Note with id {id} not found.");
+                throw new ArgumentNullException($"Note with id {id} not found.");
             }
             return note;
         }

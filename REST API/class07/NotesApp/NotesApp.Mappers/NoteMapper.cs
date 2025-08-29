@@ -9,7 +9,7 @@ namespace NotesApp.Mappers
         {
             return new NoteDto
             {
-                Id = note.Id,
+                UserId = note.Id,
                 Text = note.Text,
                 Tag = note.Tag,
                 Priority = note.Priority,

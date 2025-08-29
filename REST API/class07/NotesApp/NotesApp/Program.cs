@@ -1,4 +1,9 @@
+using NotesApp.DataAccess.Implementation;
+using NotesApp.DataAccess.Interfaces;
+using NotesApp.Domain.Models;
 using NotesApp.Helpers;
+using NotesApp.Services.Implementation;
+using NotesApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +16,10 @@ builder.Services.AddSwaggerGen();
 
 //inject database
 DependencyInjectionHelper.InjectDbContext(builder.Services);
+
+builder.Services.AddTransient<IRepository<Note>, NoteRepository>();
+builder.Services.AddTransient<IRepository<User>, UserRepository>();
+builder.Services.AddTransient<INoteService, NoteService>();
 
 var app = builder.Build();
 
