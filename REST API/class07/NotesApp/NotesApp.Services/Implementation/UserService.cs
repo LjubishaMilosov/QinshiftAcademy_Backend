@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using NotesApp.DataAccess.Interfaces;
 using NotesApp.Domain.Models;
@@ -52,8 +54,25 @@ namespace NotesApp.Services.Implementation
                 FirstName = registerUserDto.FirstName,
                 LastName = registerUserDto.LastName,
                 Username = registerUserDto.Username,
-                Password = registerUserDto.Password // in a real app, the password should be hashed and salted
+                Password = GenerateHash(registerUserDto.Password) // in a real app, the password should be hashed and salted
             };
+
+            _userRepository.Add(user);
+        }
+
+        private string GenerateHash(string password)
+        {
+            // implement a hashing algorithm here
+            using (var md5Hash = MD5.Create())
+            {
+                {
+                    var passwordBytes = Encoding.ASCII.GetBytes(password);
+                    var hashedBytes = md5Hash.ComputeHash(passwordBytes);
+                    var hashed = Encoding.ASCII.GetString(hashedBytes);
+
+                    return hashed;
+                }
+            }
         }
     }
 }
