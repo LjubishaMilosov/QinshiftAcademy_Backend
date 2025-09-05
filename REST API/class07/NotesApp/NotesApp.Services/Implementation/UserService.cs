@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Text.RegularExpressions;
+using NotesApp.DataAccess.Interfaces;
+using NotesApp.Domain.Models;
 using NotesApp.DTOs;
 using NotesApp.Helpers;
 using NotesApp.Services.Interfaces;
@@ -8,6 +10,11 @@ namespace NotesApp.Services.Implementation
 {
     public class UserService : IUserService
     {
+        private readonly IRepository<User> _userRepository;
+        public UserService(IRepository<User> userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public void RegisterUser(RegisterUserDto registerUserDto)
         {
             if(registerUserDto == null)
@@ -34,6 +41,19 @@ namespace NotesApp.Services.Implementation
                 throw new DataException("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.");
             }
 
+            //if(_userRepository.GetAll().Any(u => u.Username == registerUserDto.Username))  // not case sensitive
+            if (_userRepository.GetAll().Any(x => string.Equals(x.Username, registerUserDto.Username, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                throw new DataException($"Username {registerUserDto.Username} is already taken.");
+            }
+
+            var user = new User
+            {
+                FirstName = registerUserDto.FirstName,
+                LastName = registerUserDto.LastName,
+                Username = registerUserDto.Username,
+                Password = registerUserDto.Password // in a real app, the password should be hashed and salted
+            };
         }
     }
 }

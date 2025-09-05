@@ -1,4 +1,5 @@
-﻿using NotesApp.DataAccess.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using NotesApp.DataAccess.Interfaces;
 using NotesApp.Domain.Models;
 
 namespace NotesApp.DataAccess.Implementation
@@ -29,8 +30,7 @@ namespace NotesApp.DataAccess.Implementation
 
         public List<User> GetAll()
         {
-            return _dbContext.Users.ToList();
-            // we don't use Include() here because we don't have any navigation properties in the User entity
+            return _dbContext.Users.Include(x => x.Notes).ToList();
         }
 
         public User GetById(int id)
