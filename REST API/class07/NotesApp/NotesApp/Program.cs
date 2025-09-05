@@ -20,6 +20,7 @@ DependencyInjectionHelper.InjectDbContext(builder.Services);
 builder.Services.AddTransient<IRepository<Note>, NoteRepository>();
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<INoteService, NoteService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 

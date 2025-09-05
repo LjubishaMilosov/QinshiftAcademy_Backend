@@ -2,7 +2,7 @@
 
 namespace NotesApp.Services.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
         void RegisterUser(RegisterUserDto register);
     }

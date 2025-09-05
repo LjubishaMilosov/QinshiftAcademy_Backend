@@ -60,7 +60,7 @@ namespace NotesApp.Services.Implementation
             _userRepository.Add(user);
         }
 
-        private string GenerateHash(string password)
+        public string GenerateHash(string password)
         {
             // implement a hashing algorithm here
             using (var md5Hash = MD5.Create())
