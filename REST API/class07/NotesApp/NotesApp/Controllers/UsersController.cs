@@ -34,5 +34,23 @@ namespace NotesApp.Controllers
             }
 
         }
+
+        [HttpPost("login")]
+        public ActionResult<string> Login([FromBody] LoginUserDto loginUserDto)
+        {
+            try
+            {
+                var result = _userService.Login(loginUserDto);
+                return Ok("user loggedin.");
+            }
+            catch (DataException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
