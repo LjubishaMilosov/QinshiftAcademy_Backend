@@ -1,77 +1,107 @@
-﻿using System.Data;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using NotesApp.DataAccess.Interfaces;
+﻿using NotesApp.DataAccess.Interfaces;
 using NotesApp.Domain.Models;
 using NotesApp.DTOs;
 using NotesApp.Helpers;
 using NotesApp.Services.Interfaces;
+using System.Data;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NotesApp.Services.Implementation
 {
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
+
         public UserService(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
+
         public void RegisterUser(RegisterUserDto registerUserDto)
         {
-            if(registerUserDto == null)
+            if (registerUserDto == null)
             {
-                throw new DataException(nameof(registerUserDto));
-            }
-            ValidationHelper.ValidateRequiredStringColumnLength(registerUserDto.FirstName, "First Name", 50);
-            ValidationHelper.ValidateColumnLength(registerUserDto.LastName, "Last Name", 50);
-            ValidationHelper.ValidateRequiredStringColumnLength(registerUserDto.Username, "Username", 20);
-
-            if(string.IsNullOrEmpty(registerUserDto.Password) || string.IsNullOrEmpty(registerUserDto.ConfirmPassword))
-            {
-                throw new DataException("Password and Confirm Password are required.");
-            }
-            if(registerUserDto.Password != registerUserDto.ConfirmPassword)
-            {
-                throw new DataException("Password and Confirm Password do not match.");
+                throw new DataException("Model cannot be null");
             }
 
-            string strongPasswordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            ValidationHelper.ValidateRequiredStringColumnLength(registerUserDto.FirstName, "FirstName", 50);
+            ValidationHelper.ValidateColumnLength(registerUserDto.LastName, "LastName", 50);
+            ValidationHelper.ValidateRequiredStringColumnLength(registerUserDto.Username, "Username", 30);
 
-            if(Regex.IsMatch(registerUserDto.Password, strongPasswordRegex))
+            if (string.IsNullOrEmpty(registerUserDto.Password) || string.IsNullOrEmpty(registerUserDto.ConfirmPassword))
             {
-                throw new DataException("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.");
+                throw new DataException("Password is required!");
             }
 
-            //if(_userRepository.GetAll().Any(u => u.Username == registerUserDto.Username))  // not case sensitive
-            if (_userRepository.GetAll().Any(x => string.Equals(x.Username, registerUserDto.Username, StringComparison.InvariantCultureIgnoreCase)))
+            if (registerUserDto.Password != registerUserDto.ConfirmPassword)
             {
-                throw new DataException($"Username {registerUserDto.Username} is already taken.");
+                throw new DataException("Password must match!");
             }
 
-            var user = new User
+            string strongPasswordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+            if (!Regex.IsMatch(registerUserDto.Password, strongPasswordRegex))
+            {
+                throw new DataException("Password is not strong password!");
+            }
+
+            //if(_userRepository.GetAll().Any(x => string.Equals(x.Username, registerUserDto.Username, StringComparison.InvariantCultureIgnoreCase)))
+            //{
+            //    throw new DataException("User with that username already exists");
+            //}
+
+            if (_userRepository.GetAll().Any(x => x.Username == registerUserDto.Username))
+            {
+                throw new DataException("User with that username already exists");
+            }
+
+            //Username: Risto
+            //Password: risto123 => hash: asdasd2133 (??+??)
+            User user = new User
             {
                 FirstName = registerUserDto.FirstName,
                 LastName = registerUserDto.LastName,
                 Username = registerUserDto.Username,
-                Password = GenerateHash(registerUserDto.Password) // in a real app, the password should be hashed and salted
+                Password = GenerateHash(registerUserDto.Password),
             };
 
             _userRepository.Add(user);
         }
-
-        public string GenerateHash(string password)
+        public string Login(LoginUserDto loginUserDto)
         {
-            // implement a hashing algorithm here
+            if (loginUserDto == null)
+            {
+                throw new DataException("Model cannot be null");
+            }
+
+            if (string.IsNullOrEmpty(loginUserDto.Username) || string.IsNullOrEmpty(loginUserDto.Password))
+            {
+                throw new DataException("Username and password are required!");
+            }
+
+            var hashedPassword = GenerateHash(loginUserDto.Password);
+
+            var userDb = _userRepository.GetAll().FirstOrDefault(x => x.Username == loginUserDto.Username && x.Password == hashedPassword);
+
+            if (userDb == null)
+            {
+                throw new DataException("Wrong username or password");
+            }
+
+            return "User is logged in";
+        }
+
+        private string GenerateHash(string password)
+        {
             using (var md5Hash = MD5.Create())
             {
-                {
-                    var passwordBytes = Encoding.ASCII.GetBytes(password);
-                    var hashedBytes = md5Hash.ComputeHash(passwordBytes);
-                    var hashed = Encoding.ASCII.GetString(hashedBytes);
+                var passwordBytes = Encoding.ASCII.GetBytes(password);
+                var hashedBytes = md5Hash.ComputeHash(passwordBytes);
+                var hashed = Encoding.ASCII.GetString(hashedBytes);
 
-                    return hashed;
-                }
+                return hashed;
             }
         }
     }
