@@ -77,7 +77,9 @@ namespace NotesApp.Services.Implementation
             }
 
             if (string.IsNullOrEmpty(loginUserDto.Username) || string.IsNullOrEmpty(loginUserDto.Password))
+
             {
+
                 throw new DataException("Username and password are required!");
             }
 
@@ -90,7 +92,7 @@ namespace NotesApp.Services.Implementation
                 throw new DataException("Wrong username or password");
             }
 
-            return "User is logged in";
+            //generate JWT token
         }
 
         private string GenerateHash(string password)

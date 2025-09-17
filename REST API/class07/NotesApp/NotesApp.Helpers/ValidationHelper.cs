@@ -20,7 +20,7 @@ namespace NotesApp.Helpers
         public static void ValidateColumnLength(string value, string field, int maxNumOfChar)
         {
             var length = value == null ? 0 : value.Length;
-            if (value.Length > maxNumOfChar)
+            if (length > maxNumOfChar)
             {
                 throw new DataException($"{field} cannot be longer than {maxNumOfChar} characters.");
             }

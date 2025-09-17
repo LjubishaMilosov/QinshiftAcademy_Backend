@@ -41,7 +41,7 @@ namespace NotesApp.Controllers
             try
             {
                 var result = _userService.Login(loginUserDto);
-                return Ok("user loggedin.");
+                return Ok();
             }
             catch (DataException ex)
             {

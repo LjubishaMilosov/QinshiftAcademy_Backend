@@ -6,8 +6,8 @@ namespace NotesApp.Services.Interfaces
     {
         List<NoteDto> GetAllNotes();
 
-        NoteDto GetNoteById(int id);
+        NoteDto GetById(int id);
 
-        void AddNote(NoteDto note);
+        void AddNote(AddNoteDto note);
     }
 }

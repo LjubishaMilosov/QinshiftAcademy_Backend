@@ -16,12 +16,55 @@ namespace NotesApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<NoteDto>> GetAll()
+        public ActionResult<List<NoteDto>> GetAll([FromQuery] FilterDto filter)
         {
             try
             {
                 var result =  Ok(_noteService.GetAllNotes());
                 return result;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddNote([FromBody] AddNoteDto note)
+        {
+            try
+            {
+                _noteService.AddNote(note);
+                return StatusCode(StatusCodes.Status201Created, "Note created");
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var note = _noteService.GetById(id);
+                return Ok(note);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
             catch (Exception ex)
             {

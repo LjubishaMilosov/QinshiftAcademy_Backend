@@ -36,7 +36,7 @@ namespace NotesApp.Services.Implementation
             return notesDto;
         }
 
-        public NoteDto GetNoteById(int id)
+        public NoteDto GetById(int id)
         {
            var note = _noteRepository.GetById(id);
               //var noteDto = new NoteDto
@@ -54,29 +54,20 @@ namespace NotesApp.Services.Implementation
             return noteDto;
         }
 
-        public void AddNote(NoteDto note)
+        public void AddNote(AddNoteDto note)
         {
-            if (note == null)
-            {
-                throw new ArgumentNullException(nameof(note), "Note cannot be null");
-            }
-            if (string.IsNullOrWhiteSpace(note.Text))
-            {
-                throw new ArgumentNullException("Note text cannot be empty", nameof(note.Text));
-            }
-            if (note.Text.Length > 100)
-            {
-                throw new ArgumentException("Note text cannot exceed 100 characters", nameof(note.Text));
-            }
-            //if(note.Tag == null)  // tag is not nullable, so this conditionwill be always false.Same for Priority
-            //{
-            //    throw new ArgumentNullException("Note tag cannot be null", );
-            //}
-            var user = _noteRepository.GetById(note.UserId);
-            if (user == null)
-            {
-                throw new ArgumentException($"User with id {note.UserId} does not exist");
-            }
+            if (note == null) throw new ArgumentNullException("Model should populated!");
+
+            if (string.IsNullOrEmpty(note.Text)) throw new ArgumentNullException("Text is required");
+
+            if (note.Text.Length > 100) throw new ArgumentException("Text lenght should be max 100 chars");
+
+            //if (note.Tag == null) throw new ArgumentNullException("Tag is required"); //Tag is not nullable, so this condition will be false always
+
+            var user = _userRepository.GetById(note.UserId);
+
+            if (user == null) throw new ArgumentException($"User with id: {note.UserId}, is not found");
+
             var noteDb = new Note
             {
                 Text = note.Text,
@@ -84,7 +75,9 @@ namespace NotesApp.Services.Implementation
                 Tag = note.Tag,
                 UserId = note.UserId
             };
+
             _noteRepository.Add(noteDb);
         }
+
     }
 }
